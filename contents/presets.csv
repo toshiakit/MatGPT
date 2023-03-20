@@ -1,8 +1,9 @@
-﻿name,content,prompt,model,max_tokens,temperature
-AI Assistant,You are a helpful assistant.,Where is the capital of France?,gpt-3.5-turbo,1000,1
-English to MATLAB Code,You are a helpful assistant that helps write MATLAB code using the latest features from R2020a or later. ,"Using MATLAB R2020a or later, define two random vectors x and y, fit a linear model to the data, and plot both the data and fitted line.",gpt-3.5-turbo,1000,0
-Summarize Code,You are a helpful assistant that helps analyze MATLAB code and provides concise summary. ,"Summarize what the following code by Cecelya https://www.mathworks.com/matlabcentral/communitycontests/contests/5/entries/12418 does. 
+﻿name,content,prompt,model,max_tokens,temperature,test_code
+AI Assistant,You are a helpful assistant. Answer as concisely as possible. ,Where is the capital of France?,gpt-3.5-turbo,1000,1,0
+English to MATLAB Code,You are a helpful assistant that generate MATLAB code using the latest features from R2020a or later. ,"Define two random vectors x and y, fit a linear model to the data, and plot both the data and fitted line.",gpt-3.5-turbo,1000,0,1
+Summarize Code,You are a friendly and helpful teaching assistant for MATLAB programmers. Analyze MATLAB code and provide concise summary of what the code does. ,"Summarize what the following code by Cecelya https://www.mathworks.com/matlabcentral/communitycontests/contests/5/entries/12418 does. 
 
+```matlab
 m = 0:.01:1;
 T = -4:.01:25; 
 x=1-(5/4*(1-mod(3.6*T, 2)).^2-1/4).^2/2; 
@@ -18,9 +19,11 @@ surf(X,Y,x.*Z,X.^2+Y.^2+Z.^4);
 axis( 'equal','off') 
 view([0 33]) 
 colormap(flip(hot)) 
-shading('interp') shading('interp')",gpt-3.5-turbo,1000,0
-Explain Code Step by Step,You are a helpful assistant that helps analyze MATLAB code by providing explanation step by step.,"Explain what the following code  by Cecelya https://www.mathworks.com/matlabcentral/communitycontests/contests/5/entries/12418 does. 
+shading('interp')
+```",gpt-3.5-turbo,1000,0,0
+Explain Code Step by Step,You are a friendly and helpful teaching assistant for MATLAB programmers. Analyze MATLAB code and explain the code step by step.,"Explain what the following code  by Cecelya https://www.mathworks.com/matlabcentral/communitycontests/contests/5/entries/12418 does. 
 
+```matlab
 m = 0:.01:1;
 T = -4:.01:25; 
 x=1-(5/4*(1-mod(3.6*T, 2)).^2-1/4).^2/2; 
@@ -36,9 +39,11 @@ surf(X,Y,x.*Z,X.^2+Y.^2+Z.^4);
 axis( 'equal','off') 
 view([0 33]) 
 colormap(flip(hot)) 
-shading('interp')",gpt-3.5-turbo,1000,0
-Script to function,You are a helpful assistant that helps convert MATLAB scripts to functions using latest features in R2020a or later.,"Convert the following script  by Cecelya https://www.mathworks.com/matlabcentral/communitycontests/contests/5/entries/12418 to function, using m and T as input variables and set default values to those variables. 
+shading('interp')
+```",gpt-3.5-turbo,1000,0,0
+Script to function,You are a friendly and helpful teaching assistant for MATLAB programmers. Convert MATLAB scripts to a local functions and call the function using sample inputs.  ,"Convert the following script by Cecelya https://www.mathworks.com/matlabcentral/communitycontests/contests/5/entries/12418 to a function, using m and T as input variables and set default values to those variables. 
 
+```matlab
 m = 0:.01:1;
 T = -4:.01:25; 
 x=1-(5/4*(1-mod(3.6*T, 2)).^2-1/4).^2/2; 
@@ -54,9 +59,11 @@ surf(X,Y,x.*Z,X.^2+Y.^2+Z.^4);
 axis( 'equal','off') 
 view([0 33]) 
 colormap(flip(hot)) 
-shading('interp')",gpt-3.5-turbo,1000,0
-Add doc to function,"You are a helpful assistant that helps analyze MATLAB functions and write an elaborate, high quality docstring.","Add useful docstring to this function derived from the code by  by Cecelya https://www.mathworks.com/matlabcentral/communitycontests/contests/5/entries/12418.  
+shading('interp')
+```",gpt-3.5-turbo,1000,0,1
+Write doc to function,"You are a friendly and helpful teaching assistant for MATLAB programmers. Analyze a MATLAB function and add an elaborate, high quality docstring to the function.","Write useful docstring to this function derived from the code by Cecelya https://www.mathworks.com/matlabcentral/communitycontests/contests/5/entries/12418, using comment format %PLOTBLOOMINGLIGHTS does blah blah blah.  
 
+```matlab
 function plotBloomingLight(m,T)
 arguments
     m double {mustBeVector} = 0:.01:1;
@@ -76,37 +83,41 @@ axis( 'equal','off')
 view([0 33]) 
 colormap(flip(hot)) 
 shading('interp')
-end",gpt-3.5-turbo,1000,0
-Fix Bug,You are a helpful assistant that helps analyze buggy MATLAB code and provide error free code.,"Fix bug in the following MATLAB code
+end
+```",gpt-3.5-turbo,1000,0,0
+Fix Bug,You are a friendly and helpful teaching assistant for MATLAB programmers. Analyze buggy MATLAB code and provide error free code using latest features from R020a or later. ,"Fix bug in the following MATLAB code
 
+```matlab
 % Buggy MATLAB code
 
+a = 1; b = 2;
 function y = add(a, b)
 y = ""a"" + b
 end
+```
 
-% Fixed MATLAB code",gpt-3.5-turbo,1000,0
-Write Unit Tests,You are a helpful assistant that helps analyze MATLAB functions and write appropriate unit tests.,"Write unit tests for this function, 
+% Fixed MATLAB code",gpt-3.5-turbo,1000,0,0
+Write Unit Tests,You are a friendly and helpful teaching assistant for MATLAB programmers. Analyze MATLAB functions and write appropriate unit tests.,"Write unit tests for this function, 
 
+```matlab
 function y = add(a, b)
 y = a + b
 end
+```",gpt-3.5-turbo,1000,0,0
+Vectorize Code,You are a friendly and helpful teaching assistant for MATLAB programmers. Analyze MATLAB code and rewrite it to improve efficiency using vectorization rather than for loops.,"Vectorize the following code without using for loop. 
 
-Wite unit tests for the above MATLAB function",gpt-3.5-turbo,1000,0
-Vectorize Code,You are a helpful assistant that helps analyze MATLAB code and rewrite it to improve efficiency.,"Vectorize the following code without using for loop. 
-
+```matlab
 i = 0;
-     for t = 0:.01:10
-         i = i + 1;
-         y(i) = sin(t);
-     end",gpt-3.5-turbo,1000,0
-MATLAB to Python,You are a helpful assistant that helps translate MATLAB code to Python. Include import statements.,"Translate the followng MATLAB code to Python. x = rand(1,100); y = rand(1,100); mdl = fitlm(x, y); figure scatter(x, y) hold on plot(mdl) hold off xlabel('x') ylabel('y') legend('Data', 'Fitted Line')",gpt-3.5-turbo,1000,0
-Act as MATLAB Command Window,You are to act like MATLAB interpreter,"I want you to act like a MATLAB interpreter. I will give you MATLAB code, you'll reply with what the Command Window should show. Do not provide any explanations. Do not respond with anything except the output of the code. 
-The first code is: 
+for t = 0:.01:10
+    i = i + 1;
+    y(i) = sin(t);
+end
+```",gpt-3.5-turbo,1000,0,1
+Act as MATLAB Command Window,"You are a MATLAB interpreter. I will give you MATLAB code, you'll reply with what the Command Window should show. Do not provide any explanations. Do not respond with anything except the output of the code. ","```matlab
+x = (1:10)*2
+```
 
-""x = (1:10)*2""
-
-",gpt-3.5-turbo,1000,0
+",gpt-3.5-turbo,1000,0,0
 Sentiment Analysis,You are a helpful assistant that helps data scientists by analyzing sentiment expressed in a given text.,"Decide whether sentiment is positive, neutral, or negative for the following text
 
 1. ""I can't stand homework""
@@ -115,7 +126,7 @@ Sentiment Analysis,You are a helpful assistant that helps data scientists by ana
 4. ""My cat is adorable ❤️❤️""
 5. ""I hate chocolate""
 
-Text sentiment ratings:",gpt-3.5-turbo,1000,0
+Text sentiment ratings:",gpt-3.5-turbo,1000,0,0
 Contact Extraction,You are a helpful assistant that helps data scientists by analyzing unstructured data and extract personally identifiable information.,"Extract the name and mailing address from this text: 
 
 Dear Kelly,
@@ -127,8 +138,8 @@ Thank you for the book. Here's my address
 
 Best,
 
-Maya",gpt-3.5-turbo,1000,0
-Extract table from PDF,You are a helpful assistant that helps data scientists by analyzing unstructured data and recreate a table from the text extracted from a PDF file.,"format the following PDF data into a 6-column markdown table with 1 header and 6 rows. Start with a title, then the table and end with a footer citing the source.
+Maya",gpt-3.5-turbo,1000,0,0
+Extract table from PDF,You are a helpful assistant that helps data scientists by analyzing unstructured data and recreate a table from the text extracted from a PDF file.,"format the following PDF data into a table. Start with a title, then the table and end with a footer citing the source.
 
 A(Percentage)verage annual export growth rates of creative goods, 2006−2020
      
@@ -195,21 +206,17 @@ A(Percentage)verage annual export growth rates of creative goods, 2006−2020
      -7.2
      
      
-     ",gpt-3.5-turbo,1000,0
-Top 10 SciFi movies,You are a helpful assistant that helps data scientists extract useful public data for anaysis.,"Create a three-column markdown table of top 10 science fiction movies,  their year of release, and box office gross. Name columns 'Title', 'Year', and 'Gross'.",gpt-3.5-turbo,1000,0
-San Francisco Weather,You are a helpful assistant that helps data scientists extract useful public data for anaysis.,"Create a three-column table in CSV format of weather temperatures for San Francisco.
+     ",gpt-3.5-turbo,1000,0,0
+Top 10 SciFi movies,You are a helpful assistant that helps data scientists extract useful public data for anaysis.,"Create a  table of top 10 science fiction movies,  their year of release, and box office gross. Name columns 'Title', 'Year', and 'Gross'.",gpt-3.5-turbo,1000,0,0
+San Francisco Weather,You are a helpful assistant that helps data scientists extract useful public data for anaysis.,"Create a table of weather temperatures for San Francisco.
 Name columns 'Month', 'High', and 'Low'. 
-Use abbreviated month names.
-
-",gpt-3.5-turbo,1000,0
+Use abbreviated month names. Use numbers only for temperature using fahrenheit.",gpt-3.5-turbo,1000,0,0
 Boston Housing Prices,You are a helpful assistant that helps data scientists extract useful public data for anaysis.,"Housing prices are correlated with size of the house. 
-Create a markdown table of housing prices in Boston based on square footage as size 
+Create a table of housing prices in Boston based on square footage as size 
 with columns named 'Sqft' and 'Price' with 10 rows. Randomize the values in 'Sqft', 
-while maintaining the correlation to 'Price' with some variation.",gpt-3.5-turbo,1000,0
-Boston Landmarks,You are a helpful assistant that helps data scientists extract useful public data for anaysis.,"Create a markdown table of famous landmarks in Boston 
-with latitude and longitude, with columns named 'Landmark', 'Lat','Lon'.
-
-",gpt-3.5-turbo,1000,0
+while maintaining the correlation to 'Price' with some variation.",gpt-3.5-turbo,1000,0,0
+Boston Landmarks,You are a helpful assistant that helps data scientists extract useful public data for anaysis.,"Create a table of famous landmarks in Boston 
+with latitude and longitude in decimal degrees, i.e. 42.361145, -71.057083",gpt-3.5-turbo,1000,0,0
 Remove duplicate names,You are a helpful assistant that helps data scientists extract useful public data for anaysis.,"Here is a list of names.
 
 John Smith
@@ -226,7 +233,7 @@ Brown Jennifer
 Create a table with two columns from this list 
 that split the first name and last name. 
 If first name appear as last name, correct the order.  
-remove any duplicates. Show the table in markdown format.",gpt-3.5-turbo,1000,0
+remove any duplicates. Show the table in markdown format.",gpt-3.5-turbo,1000,0,0
 Email Domans to Company Names,You are a helpful assistant that helps data scientists extract useful public data for anaysis.,"Identify legal company names based on the following domains
 
 1. @apple.com
@@ -242,7 +249,7 @@ Email Domans to Company Names,You are a helpful assistant that helps data scient
 11. @mcdonalds.com
 12. @chevron.com1
 13. @unitedparcelservice.com
-14. @dell.com",gpt-3.5-turbo,1000,0
+14. @dell.com",gpt-3.5-turbo,1000,0,0
 Normalize University Names,You are a helpful assistant that helps data scientists extract useful public data for anaysis.,"Normalize the list of university names below. If a university has multiple names, apply the most common full name, not an abbreviation.
 
 CMU
@@ -266,4 +273,4 @@ Georgiatech
 MIT
 Massachusetts Institute of Technology
 
-",gpt-3.5-turbo,1000,0
+",gpt-3.5-turbo,1000,0,0
