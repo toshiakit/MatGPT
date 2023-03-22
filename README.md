@@ -1,4 +1,5 @@
 # MatGPT - MATLAB&reg; app and class to access ChatGPT API from OpenAI&trade;
+[![View MatGPT on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/126665-matgpt)
 [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=toshiakit/MatGPT)
 
 ![MatGPT Logo](images/MatGPTlogo.png)
