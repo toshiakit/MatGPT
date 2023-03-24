@@ -93,6 +93,6 @@ Use `saveChat` method to save the chat history to a file. The supported format i
 This code is adapted from [this MATLAB Answers comment](https://www.mathworks.com/matlabcentral/answers/1894530-connecting-to-chatgpt-using-api#answer_1154780) by [Hans Scharler](https://www.mathworks.com/matlabcentral/profile/authors/5863695) and uses [Brian Buechel](https://github.com/brianbuechel)'s [CodeChecker](helpers/CodeChecker.m) and other great contribution. 
    
 ## License
-The license for MatGPT is available in the LICENSE.TXT file in this GitHub repository.
+The license for MatGPT is available in the [LICENSE.TXT](LICENSE.TXT) file in this GitHub repository.
 
 
