@@ -64,9 +64,8 @@ classdef CodeChecker < handle
             %   [report,errorMessagess] = rubChecks(obj) also returns the 
             %   detected errors across all checks
     
-            % make the output folder and add it to the path
+            % make the output folder 
             mkdir(obj.OutputFolder)
-            addpath(obj.OutputFolder)
 
             % Get list of current files so we know which artifacts to move
             % to the output folder
