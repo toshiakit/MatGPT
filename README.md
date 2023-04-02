@@ -10,7 +10,7 @@ The app and the class are mere conduit to ChatGPT API, and you should be familia
 
 ## Requirements
 
-* **MathWorks Products (https://www.mathworks.com)**:  To use MatGPT, you need to have MATLAB R2020a or later installed on your computer. 
+* **MathWorks Products (https://www.mathworks.com)**:  To use MatGPT, you need to have MATLAB R2021a or later installed on your computer. 
 * **OpenAI API Key**: Additionally, you will need your own API key from [https://beta.openai.com/account/api-keys](https://beta.openai.com/account/api-keys).
 
 ## Installation
