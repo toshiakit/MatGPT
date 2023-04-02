@@ -41,12 +41,22 @@
 
 .code-block {
 	display: block;
-    font-size: 1.15em;
+      font-size: 1.15em;
 	background-color: #dcebf3;
 	border: 1px solid #ccc;
 	padding: 10px;
-    margin: 0px 0px 0px 0px;
+      margin: 0px 0px 0px 0px;
 }
+
+.test-block {
+	display: block;
+      font-size: 1.15em;
+	background-color: #dcf3dc;
+	border: 1px solid #ccc;
+	padding: 10px;
+      margin: 0px 0px 0px 0px;
+}
+
 
 .code-inline {
   font-size: 1.25em;
