@@ -121,38 +121,48 @@ classdef CodeChecker < handle
             % RUNCODEFILES - Tries to run all the generated scripts and
             % captures outputs/figures
 
-            % Before tests, hide the handles for currently visible figures.
-            % This ensures they don't get captured
-            previousFigs = findobj('Type','figure');
-            for i = 1:length(previousFigs)
-                previousFigs(i).HandleVisibility = 'off';
-            end
+            % Before tests, get lists of current figures, closed Simulink
+            % files, and open Simulink files
+            figsBefore = findobj('Type','figure');
+            BDsBefore = find_system('SearchDepth',0);
+            SLXsBefore = dir("*.slx");
+            SLXsBefore = {SLXsBefore.name}';
 
-            % Iterate through scripts
+            % Iterate through scripts. Run the code and capture any output
             for i = 1:height(obj.Results)
-                
-                % Run the code and capture any output 
                 try 
                     obj.Results.ScriptOutput(i) = evalc(obj.Results.ScriptName(i));
                 catch ME
                     obj.Results.IsError(i) = true;
                     obj.Results.ScriptOutput(i) = TextHelper.shortErrorReport(ME);
                 end
+            end
+            
+            % Find newly created figures and Simulink models
+            figsNew = setdiff(findobj("Type","figure"),figsBefore);
+            BDsNew = setdiff(find_system("SearchDepth",0),BDsBefore);
+            SLXsfiles = dir("*.slx");
+            SLXsNew = setdiff({SLXsfiles.name}',SLXsBefore);
+            SLXsNew = extractBefore(SLXsNew,".slx");
 
-                % Save figures
-                figs = findobj('Type','figure');
-                figNames = strings(size(figs));
-                for j = 1:length(figs)
-                    figNames(j) = obj.Results.ScriptName(i) + "_Figure" + j + ".png";
-                    saveas(figs(j),figNames(j));                    
-                end            
-                close all
+            % Load the new SLX-files. Add to list of new BDs
+            for i = 1:length(SLXsNew)
+                load_system(SLXsNew{i});
+            end
+            BDsNew = union(BDsNew,SLXsNew);
+
+            % Print screenshots for the new BDs. Then save and close them
+            for i = 1:length(BDsNew)
+                print("-s" + BDsNew{i},"-dpng",BDsNew{i} + ".png");
+                save_system(BDsNew{i});
+                close_system(BDsNew{i});
             end
 
-            % Unhide the original figures
-            for i = 1:length(previousFigs)
-                previousFigs(i).HandleVisibility = 'on';
-            end
+            % Save figures as PNG and close            
+            for i = 1:length(figsNew)
+                saveas(figsNew(i),"Figure" + i + ".png");
+                close(figsNew(i))
+            end  
         end
 
         function [testReport,errorMessages] = joinTestResults(obj)
