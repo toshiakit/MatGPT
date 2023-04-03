@@ -57,6 +57,15 @@
       margin: 0px 0px 0px 0px;
 }
 
+.test-block-error {
+	display: block;
+      font-size: 1.15em;
+	background-color: #f3dcdc;
+	border: 1px solid #ccc;
+	padding: 10px;
+      margin: 0px 0px 0px 0px;
+}
+
 
 .code-inline {
   font-size: 1.25em;
