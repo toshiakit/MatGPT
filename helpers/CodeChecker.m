@@ -123,7 +123,7 @@ classdef CodeChecker < handle
             % Also check for open and closed Simulink files            
             addOns = matlab.addons.installedAddons;
             addOns = addOns(addOns.Name=="Simulink",:);
-            hasSimulink = ~isempty(addOns) && addOns.Enabled;
+            hasSimulink = ~isdeployed && ~isempty(addOns) && addOns.Enabled;
             if hasSimulink
                 BDsBefore = find_system('SearchDepth',0);
                 SLXsBefore = dir("*.slx");
