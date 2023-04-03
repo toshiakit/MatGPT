@@ -56,13 +56,9 @@ classdef chatter < chatGPT
                 responseText = response.Body.Data.choices(1).message;
                 responseText = string(responseText.content);
                 responseText = strtrim(responseText);
-                % convert markdown table to html
-                replacedText = TextHelper.replaceTableMarkdown(responseText);
-                % convert markdown code block to html code block
-                replacedText = TextHelper.replaceCodeMarkdown(replacedText);
                 % add the text to the messages with 'assistant' role
                 obj.messages = [obj.messages, ...
-                    struct('role',"assistant",'content',replacedText)];
+                    struct('role',"assistant",'content',responseText)];
                 % add the numbers of tokens used
                 obj.total_tokens = obj.total_tokens + ...
                     response.Body.Data.usage.total_tokens;
