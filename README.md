@@ -6,12 +6,12 @@
 
 MatGPT is a MATLAB app powered by chatGPT class that allows you to easily access the ChatGPT API provided by OpenAI. With the app, you can load a list of prompts for specific use cases and engage in conversations with ease. If you're new to ChatGPT and prompt engineering, MatGPT is a great way to learn. If you're already familiar with ChatGPT, you can directly use the class.
 
-The app and the class are mere conduit to ChatGPT API, and you should be familiar with the limitations and risks associated with using this technology as well as with [OpenAI terms and policies](https://openai.com/policies). You are also responsible for any fees OpenAI may charge for the use of their API. 
+The app and class simply serve as an interface to the ChatGPT API. You should be familiar with the limitations and risks associated with using this technology as well as with [OpenAI terms and policies](https://openai.com/policies). You are responsible for any fees OpenAI may charge for the use of their API. 
 
 ## Requirements
 
 * **MathWorks Products (https://www.mathworks.com)**:  To use MatGPT, you need to have MATLAB R2021a or later installed on your computer. 
-* **OpenAI API Key**: Additionally, you will need your own API key from [https://beta.openai.com/account/api-keys](https://beta.openai.com/account/api-keys).
+* **OpenAI API Key**: Additionally, you will need your own API key from [https://platform.openai.com/account/api-keys](https://platform.openai.com/account/api-keys).
 
 ## Installation
 
@@ -99,8 +99,8 @@ myBot = chatGPT(model="gpt-3.5-turbo", max_tokens=1000, temperature=0.9, role=ro
 answer = chat(myBot, "Generate 10x10 matrix using integers from 0 to 9.")
 ```
 
-## Acknowledgement
-This code is adapted from [this MATLAB Answers comment](https://www.mathworks.com/matlabcentral/answers/1894530-connecting-to-chatgpt-using-api#answer_1154780) by [Hans Scharler](https://www.mathworks.com/matlabcentral/profile/authors/5863695) and uses [Brian Buechel](https://github.com/brianbuechel)'s [CodeChecker](helpers/CodeChecker.m) and other great contribution. 
+## Acknowledgements
+This code is adapted from [this MATLAB Answers comment](https://www.mathworks.com/matlabcentral/answers/1894530-connecting-to-chatgpt-using-api#answer_1154780) by [Hans Scharler](https://www.mathworks.com/matlabcentral/profile/authors/5863695) and uses [Brian Buechel](https://github.com/brianbuechel)'s [CodeChecker](helpers/CodeChecker.m) and other great contributions. 
    
 ## License
 The license for MatGPT is available in the [LICENSE.txt](LICENSE.txt) file in this GitHub repository.
