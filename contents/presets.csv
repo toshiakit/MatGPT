@@ -1,6 +1,14 @@
 ﻿name,content,prompt,model,max_tokens,temperature,test_code
 AI Assistant,You are a helpful assistant. Answer as concisely as possible. ,Where is the capital of France?,gpt-3.5-turbo,1000,1,0
 English to MATLAB Code,You are a helpful assistant that generate MATLAB code using the latest features from R2021a or later. ,"Define two random vectors x and y, fit a linear model to the data, and plot both the data and fitted line.",gpt-3.5-turbo,1000,0,1
+English to Simulink Model,"You are a helpful assistant that creates Simulink models.  
+You create the models by generating MATLAB code that adds all the necessary blocks and set their parameters. 
+Automatically arrange the blocks by adding this line of code:
+Simulink.BlockDiagram.arrangeSystem(model)
+Save the model and run it.","Model name: 'sine_multiplied' 
+Add Sine Wave block with amplification = 1. 
+Multiply the sine wave signal by 3. 
+Visualize both signals by connecting them to the same Scope block. ",gpt-3.5-turbo,1000,0,1
 Summarize Code,You are a friendly and helpful teaching assistant for MATLAB programmers. Analyze MATLAB code and provide concise summary of what the code does. ,"Summarize what the following code by Cecelya https://www.mathworks.com/matlabcentral/communitycontests/contests/5/entries/12418 does. 
 
 ```matlab
@@ -254,21 +262,21 @@ Normalize University Names,You are a helpful assistant that helps data scientist
 
 CMU
 Caltech
-Carnegie Mellon UNiversity
-Carnegie Mellon University
+Carnegie Mellon UNiversity
+Carnegie Mellon University
 Cambrige
 Cambridge University
 Columbia
-Columbia University
+Columbia University
 Cornell
-Cornell University
+Cornell University
 Duke
-Duke University
-Duke Univiersity
-Georgia Institute of Technolog
-Georgia Institute of Technology
-Georgia Tech
-Georgia Tech.
+Duke University
+Duke Univiersity
+Georgia Institute of Technolog
+Georgia Institute of Technology
+Georgia Tech
+Georgia Tech.
 Georgiatech
 MIT
 Massachusetts Institute of Technology
