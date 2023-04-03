@@ -1,4 +1,4 @@
-﻿name,content,prompt,model,max_tokens,temperature,test_code
+name,content,prompt,model,max_tokens,temperature,test_code
 AI Assistant,You are a helpful assistant. Answer as concisely as possible. ,Where is the capital of France?,gpt-3.5-turbo,1000,1,0
 English to MATLAB Code,You are a helpful assistant that generate MATLAB code using the latest features from R2021a or later. ,"Define two random vectors x and y, fit a linear model to the data, and plot both the data and fitted line.",gpt-3.5-turbo,1000,0,1
 English to Simulink Model,"You are a helpful assistant that creates Simulink models.  
@@ -262,21 +262,21 @@ Normalize University Names,You are a helpful assistant that helps data scientist
 
 CMU
 Caltech
-Carnegie Mellon UNiversity
-Carnegie Mellon University
+Carnegie Mellon UNiversity
+Carnegie Mellon University
 Cambrige
 Cambridge University
 Columbia
-Columbia University
+Columbia University
 Cornell
-Cornell University
+Cornell University
 Duke
-Duke University
-Duke Univiersity
-Georgia Institute of Technolog
-Georgia Institute of Technology
-Georgia Tech
-Georgia Tech.
+Duke University
+Duke Univiersity
+Georgia Institute of Technolog
+Georgia Institute of Technology
+Georgia Tech
+Georgia Tech.
 Georgiatech
 MIT
 Massachusetts Institute of Technology
