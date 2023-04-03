@@ -89,6 +89,16 @@ Use `saveChat` method to save the chat history to a file. The supported format i
 ```matlab
 [tokens,cost] = saveChat(myBot,format=".xlsx")
 ```
+
+## chatGPT class example
+```matlab
+role = "You are a MATLAB expert who only answers with code with no explanation.";
+
+myBot = chatGPT(model="gpt-3.5-turbo", max_tokens=1000, temperature=0.9, role=role);
+
+answer = chat(myBot, "Generate 10x10 matrix using integers from 0 to 9.")
+```
+
 ## Acknowledgement
 This code is adapted from [this MATLAB Answers comment](https://www.mathworks.com/matlabcentral/answers/1894530-connecting-to-chatgpt-using-api#answer_1154780) by [Hans Scharler](https://www.mathworks.com/matlabcentral/profile/authors/5863695) and uses [Brian Buechel](https://github.com/brianbuechel)'s [CodeChecker](helpers/CodeChecker.m) and other great contribution. 
    
