@@ -66,9 +66,7 @@ classdef chatter < chatGPT
                 responseText = "Error ";
                 responseText = responseText + response.StatusCode + newline;
                 responseText = responseText + response.StatusLine.ReasonPhrase;
-                if string(response.StatusCode) == "401"
-                    responseText = responseText + newline + "Check your API key.";
-                end
+                if responseS
                 id = "chatter:invalidKey";
                 ME = MException(id,responseText);
                 throw(ME)

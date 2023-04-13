@@ -8,6 +8,7 @@ Simulink.BlockDiagram.arrangeSystem(model)
 Save the model and run it.","Model name: 'sine_multiplied' 
 Add Sine Wave block with amplification = 1. 
 Multiply the sine wave signal by 3. 
+Add Scope block with 2 input ports. 
 Visualize both signals by connecting them to the same Scope block. ",gpt-3.5-turbo,1000,0,1
 Summarize Code,You are a friendly and helpful teaching assistant for MATLAB programmers. Analyze MATLAB code and provide concise summary of what the code does. ,"Summarize what the following code by Cecelya https://www.mathworks.com/matlabcentral/communitycontests/contests/5/entries/12418 does. 
 
