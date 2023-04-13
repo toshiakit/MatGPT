@@ -166,11 +166,10 @@ classdef CodeChecker < handle
                 end
             end
 
-            % Save new figures as PNG and close  
+            % Save new figures as PNG
             figsNew = setdiff(findobj("Type","figure"),figsBefore);
             for i = 1:length(figsNew)
                 saveas(figsNew(i),"Figure" + i + ".png");
-                close(figsNew(i))
             end  
         end
 
