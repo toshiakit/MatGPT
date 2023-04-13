@@ -17,7 +17,7 @@ The app and class simply serve as an interface to the ChatGPT API. You should be
 
 1. Download the content of this repository into a MATLAB path. 
 2. Launch MATLAB
-3. Before using, set an environment variable with your OpenAI API key named `OPENAI_API_KEY`. **You may want to add this to your startup file**. 
+3. Before using, set an environment variable with your OpenAI API key named `OPENAI_API_KEY`. You can also set an environmental variable using the Settings in the app. 
 
 ```matlab
 setenv("OPENAI_API_KEY","your key here")
