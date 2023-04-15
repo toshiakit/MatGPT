@@ -48,7 +48,7 @@
       margin: 0px 0px 0px 0px;
 }
 
-.test-block {
+.test-block-green {
 	display: block;
       font-size: 1.15em;
 	background-color: #dcf3dc;
@@ -57,7 +57,7 @@
       margin: 0px 0px 0px 0px;
 }
 
-.test-block-error {
+.test-block-red {
 	display: block;
       font-size: 1.15em;
 	background-color: #f3dcdc;
