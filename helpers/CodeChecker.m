@@ -194,7 +194,7 @@ classdef CodeChecker < handle
             % Set up the report header
             numBlocks = height(obj.Results);
             numErrors = length(obj.ErrorMessages);
-            reportHeader = sprintf(['<div class="test-report">Here are the test results. ' ...
+            reportHeader = sprintf(['<div class="test-report"><p>Here are the test results. ' ...
                 'There were <b>%d code blocks</b> tested and <b>%d errors</b>.</p>'], ...
                 numBlocks,numErrors);
 
@@ -251,12 +251,15 @@ classdef CodeChecker < handle
             end
 
             % List the artifacts
-            testReport = [testReport '<div class="artifacts"><p><b>Artifacts</b><p>']; 
+            testReport = [testReport '<div class="artifacts"><p><b>Artifacts</b></p>']; 
             testReport = [testReport sprintf('<code class="code-block">The following artifacts were saved to: %s\n\n',obj.OutputFolder)];
             for i = 1:length(obj.Artifacts)
                 testReport = [testReport sprintf('     %s\n',obj.Artifacts(i))]; %#ok<AGROW>
             end
             testReport = [testReport '</code></div>']; 
+            
+            % Close the initial div for the overall report
+            testReport = [testReport '</div>']; 
             
             % Assign testReport to Report property
             obj.Report = testReport;
