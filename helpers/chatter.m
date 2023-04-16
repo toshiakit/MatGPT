@@ -68,6 +68,7 @@ classdef chatter < chatGPT
                 responseText = responseText + response.StatusLine.ReasonPhrase;
                 if string(response.StatusCode) == "401"
                     responseText = responseText + newline + "Check your API key.";
+                    responseText = responseText + newline + "Your free trial for OpenAI API may have expired.";
                 end
                 id = "chatter:invalidKey";
                 ME = MException(id,responseText);
