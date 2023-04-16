@@ -224,8 +224,11 @@ Boston Housing Prices,You are a helpful assistant that helps data scientists ext
 Create a table of housing prices in Boston based on square footage as size 
 with columns named 'Sqft' and 'Price' with 10 rows. Randomize the values in 'Sqft', 
 while maintaining the correlation to 'Price' with some variation.",gpt-3.5-turbo,1000,0,0
-Boston Landmarks,You are a helpful assistant that helps data scientists extract useful public data for analysis.,"Create a table of famous landmarks in Boston 
-with latitude and longitude in decimal degrees, i.e. 42.361145, -71.057083",gpt-3.5-turbo,1000,0,0
+Boston Landmarks,You are a helpful assistant that helps data scientists extract useful public data for analysis.,"Create a markdown table of famous landmarks in Boston 
+     with latitude and longitude in decimal degrees, i.e. 42.361145, -71.057083
+     Generate MATLAB Code that stores the data in variables landmarks, lat and lon. 
+     Use geoscatter function to plot the data points. Annotate the data points with the names of the landmarks using text function.
+     Avoid using for loop.",gpt-3.5-turbo,1000,0,0
 Remove duplicate names,You are a helpful assistant that helps data scientists extract useful public data for analysis.,"Here is a list of names.
 
 John Smith
