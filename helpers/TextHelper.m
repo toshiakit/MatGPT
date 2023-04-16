@@ -112,62 +112,63 @@ classdef TextHelper
                 str string {mustBeTextScalar}
             end
 
-            % split the input text by line breaks
-            strLines = split(str,newline);
-            % if there is no "|" character, it doens't contain a table
-            if ~any(contains(strLines, "|"))
+            % define table pattern
+            tblpat = lineBoundary+"| "+wildcardPattern(1,Inf)+" |"+lineBoundary;
+            % extract table
+            tblstr = extract(str,tblpat);
+            % table is not found, exit
+            if isempty(tblstr)
                 newStr = str;
                 return
             end
-            % remove "|" at the beginning and end of a line
-            tblBordersPat = [lineBoundary+"|","|"+lineBoundary];
-            trimmedStr = strtrim(erase(strtrim(strLines), tblBordersPat));
-            % split each line by "|"
-            splittedStr = arrayfun(@(x) (strtrim(split(x,"|")))', trimmedStr, UniformOutput=false);
-            % get the number of columns in each line
-            numCols = cellfun(@numel, splittedStr);
-            % find the header
-            headerPat = optionalPattern(":") + asManyOfPattern(characterListPattern("-"),2) + optionalPattern(":");
-            headerRowIdx = find(cellfun(@(x) all(contains(x,headerPat)), splittedStr),1) - 1;
-            % lines with the same number of cols are in the table
-            rowIdx = numCols == numCols(headerRowIdx);
-            % extract table block and merge lines into a string
-            tblBlock = splittedStr(rowIdx);
-            mergedTbl = vertcat(tblBlock{:});
-            % extract header
-            theader = string(mergedTbl(1,:));
-            % extract body
-            tbody = mergedTbl(3:end,:);
-            % generate table header
-            htmlTbl = "<table class='resp'>" + newline;
-            htmlTbl = htmlTbl + "<thead>" + newline;
-            htmlTbl = htmlTbl + "<tr>" + newline;
-            for ii = 1:numel(theader)
-                htmlTbl = htmlTbl + "<th>" + theader(ii) + "</th>" + newline;
-            end
-            htmlTbl = htmlTbl + "</tr>" + newline;
-            htmlTbl = htmlTbl + "</thead>" + newline;
-            % generate table body
-            htmlTbl = htmlTbl + "<tbody>" + newline;
-            for ii = 1:size(tbody,1)
+            try
+                % remove "|" at the beginning and end of a line
+                tblBordersPat = [lineBoundary+"|","|"+lineBoundary];
+                trimmedTbl = strtrim(erase(strtrim(tblstr), tblBordersPat));
+                % split each line by "|"
+                splittedTbl = arrayfun(@(x) (strtrim(split(x,"|")))', trimmedTbl, UniformOutput=false);
+                % get the number of columns in each line
+                numCols = cellfun(@numel, splittedTbl);
+                % find the header separator
+                separatorPat = optionalPattern(":") + asManyOfPattern(characterListPattern("-"),2) + optionalPattern(":");
+                % the header is the 1 row up
+                headerRowIdx = find(cellfun(@(x) all(contains(x,separatorPat)), splittedTbl),1) - 1;
+                % lines with the same number of cols are in the table
+                rowIdx = numCols == numCols(headerRowIdx);
+                % extract table block and merge lines into a string
+                tblBlock = splittedTbl(rowIdx);
+                mergedTbl = vertcat(tblBlock{:});
+                % extract header
+                theader = string(mergedTbl(1,:));
+                % extract body
+                tbody = mergedTbl(3:end,:);
+                % generate table header
+                htmlTbl = "<table class='resp'>" + newline;
+                htmlTbl = htmlTbl + "<thead>" + newline;
                 htmlTbl = htmlTbl + "<tr>" + newline;
-                for jj = 1:numel(theader)
-                    htmlTbl = htmlTbl + "<td>" + tbody(ii,jj) + "</td>" + newline;
+                for ii = 1:numel(theader)
+                    htmlTbl = htmlTbl + "<th>" + theader(ii) + "</th>" + newline;
                 end
                 htmlTbl = htmlTbl + "</tr>" + newline;
+                htmlTbl = htmlTbl + "</thead>" + newline;
+                % generate table body
+                htmlTbl = htmlTbl + "<tbody>" + newline;
+                for ii = 1:size(tbody,1)
+                    htmlTbl = htmlTbl + "<tr>" + newline;
+                    for jj = 1:numel(theader)
+                        htmlTbl = htmlTbl + "<td>" + tbody(ii,jj) + "</td>" + newline;
+                    end
+                    htmlTbl = htmlTbl + "</tr>" + newline;
+                end
+                htmlTbl = htmlTbl + "</tbody>" + newline;
+                htmlTbl = htmlTbl + "</table>";
+                % replace markdown table with html table
+                newStr = replace(str,tblpat,htmlTbl);
+            catch
+                % if error, return the original string
+                newStr = str;
+                return
             end
-            htmlTbl = htmlTbl + "</tbody>" + newline;
-            htmlTbl = htmlTbl + "</table>";
-
-            % find rows that contain table
-            tblBordersPat = lineBoundary+"|"+wildcardPattern+"|"+lineBoundary;
-            rowIdx = find(matches(strLines,tblBordersPat));
-            % replace the first line of the table with the HTML table
-            strLines(rowIdx(1)) = htmlTbl;
-            % remove the rest of the table lines
-            strLines(rowIdx(2:end)) = [];
-            % turn it into a scalar
-            newStr = join(strLines,newline);
         end
     end
 end
