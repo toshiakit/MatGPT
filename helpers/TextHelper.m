@@ -163,7 +163,7 @@ classdef TextHelper
                 htmlTbl = htmlTbl + "</tbody>" + newline;
                 htmlTbl = htmlTbl + "</table>";
                 % replace markdown table with html table
-                newStr = replace(str,tblpat,htmlTbl);
+                newStr = replace(str,join(tblstr,newline),htmlTbl);
             catch
                 % if error, return the original string
                 newStr = str;
