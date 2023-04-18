@@ -15,7 +15,7 @@ classdef chatter < chatGPT
             % retrieve API key from the environment
             api_key = getenv("OPENAI_API_KEY");
             if isempty(api_key)
-                id = "chatGPT:missingKey";
+                id = "chatter:missingKey";
                 msg = "No API key found in the enviroment variable" + newline;
                 msg = msg + "Before using, set an environment variable ";
                 msg = msg + "with your OpenAI API key as 'MY_OPENAI_KEY'";
@@ -66,6 +66,13 @@ classdef chatter < chatGPT
                 responseText = "Error ";
                 responseText = responseText + response.StatusCode + newline;
                 responseText = responseText + response.StatusLine.ReasonPhrase;
+                if string(response.StatusCode) == "401"
+                    responseText = responseText + newline + "Check your API key.";
+                    responseText = responseText + newline + "Your free trial for OpenAI API may have expired.";
+                end
+                id = "chatter:invalidKey";
+                ME = MException(id,responseText);
+                throw(ME)
             end
         end
 

@@ -117,8 +117,11 @@ classdef CodeChecker < handle
             % RUNCODEFILES - Tries to run all the generated scripts and
             % captures outputs/figures
 
-            % Before tests, get lists of current figures
+            % Before tests, make existing figure handles invisible
             figsBefore = findobj('Type','figure');
+            for i = 1:length(figsBefore)
+                figsBefore(i).HandleVisibility = "off";
+            end
 
             % Also check for open and closed Simulink files            
             addOns = matlab.addons.installedAddons;
@@ -144,7 +147,7 @@ classdef CodeChecker < handle
                 end
             end
 
-            % Find newly created figures and Simulink models            
+            % Find newly Simulink models            
             if hasSimulink
                 BDsNew = setdiff(find_system("SearchDepth",0),BDsBefore);
                 BDsNew(BDsNew=="simulink") = [];
@@ -166,12 +169,14 @@ classdef CodeChecker < handle
                 end
             end
 
-            % Save new figures as PNG and close  
-            figsNew = setdiff(findobj("Type","figure"),figsBefore);
-            for i = 1:length(figsNew)
-                saveas(figsNew(i),"Figure" + i + ".png");
-                close(figsNew(i))
-            end  
+            % Save new figures as png and reset the old figures as visible
+            figsAfter = findobj("Type","figure");
+            for i = 1:length(figsAfter)
+                saveas(figsAfter(i),"Figure" + i + ".png");                                
+            end
+            for i = 1:length(figsBefore)
+                figsBefore(i).HandleVisibility = "on";
+            end
         end
 
         function processResults(obj)
@@ -186,28 +191,53 @@ classdef CodeChecker < handle
             % Get the error messages from the Results table
             obj.ErrorMessages = obj.Results.ScriptOutput(obj.Results.IsError);
 
+            % Set up the report header
+            numBlocks = height(obj.Results);
+            numErrors = length(obj.ErrorMessages);
+            reportHeader = sprintf(['<div class="test-report"><p>Here are the test results. ' ...
+                'There were <b>%d code blocks</b> tested and <b>%d errors</b>.</p>'], ...
+                numBlocks,numErrors);
+
+            % Handle plurals
+            if numBlocks == 1 
+                reportHeader = replace(reportHeader,'were','was');
+                reportHeader = replace(reportHeader,'blocks','block');
+            end
+            if numErrors == 1
+                reportHeader = replace(reportHeader,'errors','error');
+            end
+
             % Loop through results table to make the report
-            testReport = '';
+            testReport = reportHeader;
             for i = 1:height(obj.Results)
 
                 % Start the report with the script name
-                testReport = [testReport sprintf('%s Test: %s %s\n\n',repelem('-',15), ...
-                    obj.Results.ScriptName(i),repelem('-',15))]; %#ok<AGROW>
+                testReport = [testReport sprintf('<div class="test"><p><b>Test:</b> %s</p>', ...
+                    obj.Results.ScriptName(i))]; %#ok<AGROW>
 
+                % Use error style if code produced an error
+                codeBlockClass = "test-block-green";
+                if obj.Results.IsError(i)
+                    codeBlockClass = "test-block-red";
+                end
+                
                 % Add code
-                testReport = [testReport sprintf('%%%% Code: \n%s\n\n', ...
-                    obj.Results.ScriptContents(i))]; %#ok<AGROW>
+                testReport = [testReport sprintf('<code class=%s>%%%% Code: \n\n%s\n\n', ...
+                    codeBlockClass,obj.Results.ScriptContents(i))]; %#ok<AGROW>
 
                 % Add output
-                testReport = [testReport sprintf('%%%% Command Window Output: \n%s\n\n', ...
+                testReport = [testReport sprintf('%%%% Command Window Output: \n\n%s', ...
                     obj.Results.ScriptOutput(i))]; %#ok<AGROW>
+
+                % Add the closing tags
+                testReport = [testReport '</code></div>']; %#ok<AGROW>
             end
 
             % Show any image artifacts
             imageFiles = obj.Artifacts(contains(obj.Artifacts,".png"));
             folders = split(obj.OutputFolder,filesep);
             if ~isempty(imageFiles)
-                testReport = [testReport sprintf('%s Figures %s\n\n',repelem('-',30),repelem('-',30))]; 
+                testReport = [testReport '<div class="figures"><p><b>Figures</b></p>']; 
                 for i = 1:length(imageFiles)
                     % Get the relative path of the image. Assumes that the HTML
                     % file is at the same level as the "GeneratedCode" folder                
@@ -215,36 +245,24 @@ classdef CodeChecker < handle
                     relativePath = replace(relativePath,'\','/');
     
                     % Assemble the html code for displaying the image
-                    testReport = [testReport sprintf('<img src="%s" class="ml-figure"/>\n\n',relativePath)]; %#ok<AGROW>
+                    testReport = [testReport sprintf('<div class="figure"><img src="%s" class="ml-figure"/></div>',relativePath)]; %#ok<AGROW>
                 end
+                testReport = [testReport '</div>']; 
             end
 
             % List the artifacts
-            testReport = [testReport sprintf('%s Artifacts %s\n\n',repelem('-',30),repelem('-',30))]; 
-            testReport = [testReport sprintf('The following artifacts were saved to: %s\n\n',obj.OutputFolder)];
+            testReport = [testReport '<div class="artifacts"><p><b>Artifacts</b></p>']; 
+            testReport = [testReport sprintf('<code class="code-block">The following artifacts were saved to: %s\n\n',obj.OutputFolder)];
             for i = 1:length(obj.Artifacts)
-                testReport = [testReport sprintf('    %s\n',obj.Artifacts(i))]; %#ok<AGROW>
+                testReport = [testReport sprintf('     %s\n',obj.Artifacts(i))]; %#ok<AGROW>
             end
-
-            % Remove trailing newlines
-            testReport = strip(testReport,"right");  
-
-            % Set up the report format string 
-            numBlocks = height(obj.Results);
-            numErrors = length(obj.ErrorMessages);
-            reportFormat = 'Here are the test results. There were <b>%d code blocks</b> tested and <b>%d errors</b>.\n\n```\n%s\n```';
-
-            % Handle plurals
-            if numBlocks == 1 
-                reportFormat = replace(reportFormat,'were','was');
-                reportFormat = replace(reportFormat,'blocks','block');
-            end
-            if numErrors == 1
-                reportFormat = replace(reportFormat,'errors','error');
-            end
-
+            testReport = [testReport '</code></div>']; 
+            
+            % Close the initial div for the overall report
+            testReport = [testReport '</div>']; 
+            
             % Assign testReport to Report property
-            obj.Report = sprintf(reportFormat,numBlocks,numErrors,testReport);
+            obj.Report = testReport;
         end
     end
 end

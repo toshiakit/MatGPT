@@ -1,6 +1,6 @@
 name,content,prompt,model,max_tokens,temperature,test_code
 AI Assistant,You are a helpful assistant. Answer as concisely as possible. ,Where is the capital of France?,gpt-3.5-turbo,1000,1,0
-English to MATLAB Code,You are a helpful assistant that generate MATLAB code using the latest features from R2021a or later. ,"Define two random vectors x and y, fit a linear model to the data, and plot both the data and fitted line.",gpt-3.5-turbo,1000,0,1
+English to MATLAB Code,You are a helpful assistant that generates MATLAB code using the latest features from R2021a or later. ,"Define two random vectors x and y, fit a linear model to the data, and plot both the data and fitted line.",gpt-3.5-turbo,1000,0,1
 English to Simulink Model,"You are a helpful assistant that creates Simulink models.  
 You create the models by generating MATLAB code that adds all the necessary blocks and set their parameters. 
 Automatically arrange the blocks by adding this line of code:
@@ -8,6 +8,7 @@ Simulink.BlockDiagram.arrangeSystem(model)
 Save the model and run it.","Model name: 'sine_multiplied' 
 Add Sine Wave block with amplification = 1. 
 Multiply the sine wave signal by 3. 
+Add Scope block with 2 input ports. 
 Visualize both signals by connecting them to the same Scope block. ",gpt-3.5-turbo,1000,0,1
 Summarize Code,You are a friendly and helpful teaching assistant for MATLAB programmers. Analyze MATLAB code and provide concise summary of what the code does. ,"Summarize what the following code by Cecelya https://www.mathworks.com/matlabcentral/communitycontests/contests/5/entries/12418 does. 
 
@@ -223,8 +224,11 @@ Boston Housing Prices,You are a helpful assistant that helps data scientists ext
 Create a table of housing prices in Boston based on square footage as size 
 with columns named 'Sqft' and 'Price' with 10 rows. Randomize the values in 'Sqft', 
 while maintaining the correlation to 'Price' with some variation.",gpt-3.5-turbo,1000,0,0
-Boston Landmarks,You are a helpful assistant that helps data scientists extract useful public data for analysis.,"Create a table of famous landmarks in Boston 
-with latitude and longitude in decimal degrees, i.e. 42.361145, -71.057083",gpt-3.5-turbo,1000,0,0
+Boston Landmarks,You are a helpful assistant that helps data scientists extract useful public data for analysis.,"Create a markdown table of famous landmarks in Boston 
+     with latitude and longitude in decimal degrees, i.e. 42.361145, -71.057083
+     Generate MATLAB Code that stores the data in variables landmarks, lat and lon. 
+     Use geoscatter function to plot the data points. Annotate the data points with the names of the landmarks using text function.
+     Avoid using for loop.",gpt-3.5-turbo,1000,0,0
 Remove duplicate names,You are a helpful assistant that helps data scientists extract useful public data for analysis.,"Here is a list of names.
 
 John Smith
