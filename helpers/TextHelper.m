@@ -113,7 +113,7 @@ classdef TextHelper
             end
 
             % define table pattern
-            tblpat = lineBoundary+"| "+wildcardPattern(1,Inf)+" |"+lineBoundary;
+            tblpat = lineBoundary + "|" + (" "|"-") + wildcardPattern(1,Inf) + (" "|"-") + "|" + lineBoundary;
             % extract table
             tblstr = extract(str,tblpat);
             % table is not found, exit
