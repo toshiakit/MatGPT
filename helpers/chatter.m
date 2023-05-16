@@ -3,13 +3,14 @@ classdef chatter < chatGPT
     %   This subclass adds a new method 'injectChatLog'
 
     methods
-        function responseText = chat(obj,prompt)
+        function responseText = chat(obj,prompt,options)
             %CHAT This send http requests to the api
             %   Pass the prompt as input argument to send the request
             %   Only messages with valid roles are sent in messages object
             arguments
                 obj
                 prompt string {mustBeTextScalar}
+                options.stop string {mustBeText,mustBeNonzeroLengthText}
             end
 
             % retrieve API key from the environment
@@ -37,12 +38,16 @@ classdef chatter < chatGPT
             m = obj.messages;
             roles = arrayfun(@(x) string(x.role),m);
             m(~ismember(roles,["system","user","assistant"])) = [];
-
             % shorten calls to MATLAB HTTP interfaces
             import matlab.net.*
             import matlab.net.http.*
             % construct http message content
-            query = struct('model',obj.model,'messages',m,'max_tokens',obj.max_tokens,'temperature',obj.temperature);
+            % 
+            if isfield(options,'stop')
+                query = struct('model',obj.model,'messages',m,'max_tokens',obj.max_tokens,'temperature',obj.temperature,'stop',options.stop);
+            else
+                query = struct('model',obj.model,'messages',m,'max_tokens',obj.max_tokens,'temperature',obj.temperature);
+            end            
             % the headers for the API request
             headers = HeaderField('Content-Type', 'application/json');
             headers(2) = HeaderField('Authorization', "Bearer " + api_key);

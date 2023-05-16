@@ -32,11 +32,15 @@ setenv("OPENAI_API_KEY","your key here")
 * Presets are loaded from [Presets.csv](contents/presets.csv) - feel free to customize your prompts. 
 3. In the Main tab, a sample prompt is already provided based on the preset you selected, but feel free to replace it with your own. When you click `Send` button, the response will be shown in the 'Chat' tab. 
 * The `Send` button is disabled until a chat is configured in the Settings tab.
-* If your prompt is intended to generate MATLAB code, Check `Test Generated MATLAB Code` checkbox to test the returned code.
+* If you want suggestion for follow-up questions in the reponse, check `Suggest follow-up questions` checkbox. 
+* If your prompt is intended to generate MATLAB code, check `Test Generated MATLAB Code` checkbox to test the returned code.
 * The Usage tab shows number of tokens used and the cost incurred in the current chat session. 
+* Add stop sequences in `Advanced` tab to specify the sequences where the API will stop generating further tokens
 4. Continue the conversation by keep adding more prompts and clicking `Send`. 
-5. You can right-click a chat in the left nav to rename, delete, or save the chat to a text file. 
+5. You can right-click or double-click a chat in the left nav to rename, delete, or save the chat to a text file. 
 6. When you close the app, the chat will be saved and will be reloaded into the left nav when you relaunch the app.
+
+### 
 
 ## How to use: chatGPT class
 
