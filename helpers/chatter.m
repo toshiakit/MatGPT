@@ -3,13 +3,15 @@ classdef chatter < chatGPT
     %   This subclass adds a new method 'injectChatLog'
 
     methods
-        function responseText = chat(obj,prompt)
+        function responseText = chat(obj,prompt,options)
             %CHAT This send http requests to the api
             %   Pass the prompt as input argument to send the request
             %   Only messages with valid roles are sent in messages object
             arguments
                 obj
                 prompt string {mustBeTextScalar}
+                options.timeout double {mustBeScalarOrEmpty}
+                options.stop string {mustBeText,mustBeNonzeroLengthText}
             end
 
             % retrieve API key from the environment
@@ -37,19 +39,31 @@ classdef chatter < chatGPT
             m = obj.messages;
             roles = arrayfun(@(x) string(x.role),m);
             m(~ismember(roles,["system","user","assistant"])) = [];
-
             % shorten calls to MATLAB HTTP interfaces
             import matlab.net.*
             import matlab.net.http.*
             % construct http message content
-            query = struct('model',obj.model,'messages',m,'max_tokens',obj.max_tokens,'temperature',obj.temperature);
+            % 
+            if isfield(options,'stop')
+                query = struct('model',obj.model,'messages',m,'max_tokens',obj.max_tokens,'temperature',obj.temperature,'stop',options.stop);
+            else
+                query = struct('model',obj.model,'messages',m,'max_tokens',obj.max_tokens,'temperature',obj.temperature);
+            end            
             % the headers for the API request
             headers = HeaderField('Content-Type', 'application/json');
             headers(2) = HeaderField('Authorization', "Bearer " + api_key);
             % the request message
             request = RequestMessage('post',headers,query);
+
+            % Create a HTTPOptions object; set proxy in MATLAB Web Preferences if needed
+            httpOpts = matlab.net.http.HTTPOptions;
+            % Set the ConnectTimeout option to 30 seconds
+            if isfield(options,'timeout') && options.timeout > 0
+                httpOpts.ConnectTimeout = options.timeout;
+            end
             % send the request and store the response
-            response = send(request, URI(obj.api_endpoint));
+            response = send(request, URI(obj.api_endpoint),httpOpts);
+
             % extract the response text
             if response.StatusCode == "OK"
                 % extract text from the response
@@ -68,7 +82,11 @@ classdef chatter < chatGPT
                 responseText = responseText + response.StatusLine.ReasonPhrase;
                 if string(response.StatusCode) == "401"
                     responseText = responseText + newline + "Check your API key.";
-                    responseText = responseText + newline + "Your free trial for OpenAI API may have expired.";
+                    responseText = responseText + newline + "You may have an invalid API key.";
+                elseif string(response.StatusCode) == "404"
+                    responseText = responseText + newline + "You may not have access to the model.";
+                elseif string(response.StatusCode) == "429"
+                    responseText = responseText + newline + "You exceeded the API limit. Your free trial for OpenAI API may have expired.";
                 end
                 id = "chatter:invalidKey";
                 ME = MException(id,responseText);
