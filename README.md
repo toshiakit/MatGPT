@@ -8,6 +8,13 @@ MatGPT is a MATLAB app powered by chatGPT class that allows you to easily access
 
 The app and class simply serve as an interface to the ChatGPT API. You should be familiar with the limitations and risks associated with using this technology as well as with [OpenAI terms and policies](https://openai.com/policies). You are responsible for any fees OpenAI may charge for the use of their API. 
 
+## What's New
+
+* adds support for GPT-4 models [available to all API users who have a history of successful payments](https://openai.com/blog/gpt-4-api-general-availability)
+* adds Connection Timeout settings. You can add proxy via [Web Preferences](https://www.mathworks.com/help/matlab/ref/preferences.html) in MATLAB.
+* adds support for stop sequences (max 4). 
+* improves the description of the API error messages
+
 ## Requirements
 
 * **MathWorks Products (https://www.mathworks.com)**:  To use MatGPT, you need to have MATLAB R2021a or later installed on your computer. 
@@ -26,7 +33,7 @@ setenv("OPENAI_API_KEY","your key here")
 
 ## How to use: MatGPT app
 
-![MatGPT Chat Tab](images/MatGPT.png)
+![MatGPT Chat Tab](images/MatGPT.gif)
 1. Click on "+ New Chat" in the left nav to add a new chat. This opens the Settings tab. 
 2. In the Settings tab, either choose a preset to populate the settings or customize on your own. Once you have completed the settings, click "Start New Chat" to initiate a chat. This will take you back to the Main tab. 
 * Presets are loaded from [Presets.csv](contents/presets.csv) - feel free to customize your prompts. 
