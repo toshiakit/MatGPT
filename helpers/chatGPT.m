@@ -3,7 +3,7 @@ classdef chatGPT < handle
     %   Create an instance using your own API key, and optionally
     %   max_tokens that determine the length of the response
     %
-    %   ask method lets you send a prompt text to the API as HTTP request
+    %   chat method lets you send a prompt text to the API as HTTP request
     %   and parses the response.
     %
     %   Before using, set an environment variable with your OpenAI API key
@@ -14,7 +14,7 @@ classdef chatGPT < handle
     properties (Access = public)
         % the API endpoint
         api_endpoint = "https://api.openai.com/v1/chat/completions";
-        % ChatGPT model to use - gpt-3.5-turbo or gpt-3.5-turbo-0301
+        % ChatGPT model to use - gpt-3.5-turbo, etc.
         model;
         % what role the bot should play
         role;
@@ -25,6 +25,8 @@ classdef chatGPT < handle
         % store chat log in messages object
         messages;
         % store usage
+        completion_tokens = 0;
+        prompt_tokens = 0;
         total_tokens = 0;
     end
 
@@ -106,6 +108,10 @@ classdef chatGPT < handle
                 obj.messages = [obj.messages, ...
                     struct('role',"assistant",'content',responseText)];
                 % add the tokens used
+                obj.completion_tokens = obj.completion_tokens + ...
+                    response.Body.Data.usage.completion_tokens;
+                obj.prompt_tokens = obj.prompt_tokens + ...
+                    response.Body.Data.usage.prompt_tokens;
                 obj.total_tokens = obj.total_tokens + ...
                     response.Body.Data.usage.total_tokens;
             else
@@ -115,12 +121,11 @@ classdef chatGPT < handle
             end
         end
 
-        function [tokens_used, cost] = usage(obj)
+        function [completion_tokensd, prompt_tokens, total_tokens] = usage(obj)
             %USAGE retunrs the number of tokens used and the cost
-            tokens_used = obj.total_tokens;
-            % as of March 1, 2023, it's priced at $0.002 per 1K tokens
-            price = 0.002/1000;
-            cost = round(tokens_used * price,4);
+            completion_tokensd = obj.completion_tokens;
+            prompt_tokens = obj.prompt_tokens;
+            total_tokens = obj.total_tokens;
         end
 
         function saveChat(obj,options)
