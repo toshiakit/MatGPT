@@ -88,7 +88,8 @@ classdef chatter < chatGPT
                     responseText = responseText + newline + "Check your API key.";
                     responseText = responseText + newline + "You may have an invalid API key.";
                 elseif string(response.StatusCode) == "404"
-                    responseText = responseText + newline + "You may not have access to the model.";
+                    responseText = responseText + newline + "You may not have access to the model: " + ...
+                        obj.model + ". Consider using another model.";
                 elseif string(response.StatusCode) == "429"
                     responseText = responseText + newline + "You exceeded the API limit. Your free trial for OpenAI API may have expired.";
                 end

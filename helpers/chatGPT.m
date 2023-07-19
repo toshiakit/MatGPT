@@ -122,7 +122,7 @@ classdef chatGPT < handle
         end
 
         function [completion_tokensd, prompt_tokens, total_tokens] = usage(obj)
-            %USAGE retunrs the number of tokens used and the cost
+            %USAGE retunrs the number of tokens used
             completion_tokensd = obj.completion_tokens;
             prompt_tokens = obj.prompt_tokens;
             total_tokens = obj.total_tokens;
