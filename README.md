@@ -53,7 +53,8 @@ setenv("OPENAI_API_KEY","your key here")
 
 ## How to use: chatGPT class
 
-chatGPT class creates an instance to access OpenAI API using your own API key, and optionally `max_tokens` that determine the length of the response. Once you create an instance, then you can use its chat method to post prompt via OpenAPI ChatGPT API released on March 1, 2023.
+chatGPT class creates an instance to access OpenAI API using your own API key, and optionally `max_tokens` that determine the length of the response. Once you create an instance, then you can use its chat method to post prompt via OpenAPI ChatGPT API updated on June 13, 2023.
+Please note that this class doesn't support function calling.
 
 ### Where to find it
 [chatGPT](helpers/chatGPT.m) class is located in `helpers` folder. 
@@ -72,7 +73,7 @@ You can also set `max_tokens` parameter, which determines the length of the resp
 myBot = chatGPT(max_tokens=50);
 ```
 You can also specify other parameters, such as `model` and `temperature`.
-* models: gpt-3.5-turbo (default - stable release), gpt-3.5-turbo-0301 (latest release) 
+* models: gpt-3.5-turbo (default - stable release), gpt-4 (requires paid subsription to the API) 
 * temperature: 0 = more strict, 1 =  balanced, 2 = more creative
 
 You can pass a `role` to prime the chatbot for a specific use case. By default the chatbot is primed to act as an AI assistant, using the prompt "You are a helpful assistant." You can customize this for specific use cases. 
