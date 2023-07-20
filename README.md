@@ -12,8 +12,10 @@ The app and class simply serve as an interface to the ChatGPT API. You should be
 
 * adds support for GPT-4 models [available to all API users who have a history of successful payments](https://openai.com/blog/gpt-4-api-general-availability)
 * adds Connection Timeout settings. You can add proxy via [Web Preferences](https://www.mathworks.com/help/matlab/ref/preferences.html) in MATLAB.
-* adds support for stop sequences (max 4). 
+* adds support for stop sequences (max 4).
+* adds support for 3 follow-up questions. 
 * improves the description of the API error messages
+* removed fee calculation from the usage panel due to frequent updates to the API pricing. 
 
 ## Requirements
 
@@ -51,7 +53,8 @@ setenv("OPENAI_API_KEY","your key here")
 
 ## How to use: chatGPT class
 
-chatGPT class creates an instance to access OpenAI API using your own API key, and optionally `max_tokens` that determine the length of the response. Once you create an instance, then you can use its chat method to post prompt via OpenAPI ChatGPT API released on March 1, 2023.
+chatGPT class creates an instance to access OpenAI API using your own API key, and optionally `max_tokens` that determine the length of the response. Once you create an instance, then you can use its chat method to post prompt via OpenAPI ChatGPT API updated on June 13, 2023.
+Please note that this class doesn't support function calling.
 
 ### Where to find it
 [chatGPT](helpers/chatGPT.m) class is located in `helpers` folder. 
@@ -70,7 +73,7 @@ You can also set `max_tokens` parameter, which determines the length of the resp
 myBot = chatGPT(max_tokens=50);
 ```
 You can also specify other parameters, such as `model` and `temperature`.
-* models: gpt-3.5-turbo (default - stable release), gpt-3.5-turbo-0301 (latest release) 
+* models: gpt-3.5-turbo (default - stable release), gpt-4 (requires paid subsription to the API) 
 * temperature: 0 = more strict, 1 =  balanced, 2 = more creative
 
 You can pass a `role` to prime the chatbot for a specific use case. By default the chatbot is primed to act as an AI assistant, using the prompt "You are a helpful assistant." You can customize this for specific use cases. 
@@ -89,16 +92,17 @@ answer = chat(myBot,"your prompt")
 You will get an error if the API didn't return response successfully.
 
 ### Check the token usage
-Use `usage` method to obtain the total number of tokens used in the current session. It returns both the number of tokens as well as the cost. 
+Use `usage` method to obtain the number of tokens used in the current session. It returns the completion tokens used, prompt tokens used, and total tokens used.
+Different API rate applies depending on the model and type of tokens. Please consult [OpenAI pricing page](https://openai.com/pricing) for details. 
 
 ```matlab
-[tokens,cost] = usage(myBot)
+[completion_tokens,prompt_tokens,total_tokens] = usage(myBot)
 ```
 ### Save the chat history
 Use `saveChat` method to save the chat history to a file. The supported format includes .mat, .xlsx, and .json. 
 
 ```matlab
-[tokens,cost] = saveChat(myBot,format=".xlsx")
+saveChat(myBot,format=".xlsx")
 ```
 
 ## chatGPT class example

@@ -74,6 +74,10 @@ classdef chatter < chatGPT
                 obj.messages = [obj.messages, ...
                     struct('role',"assistant",'content',responseText)];
                 % add the numbers of tokens used
+                obj.completion_tokens = obj.completion_tokens + ...
+                    response.Body.Data.usage.completion_tokens;
+                obj.prompt_tokens = obj.prompt_tokens + ...
+                    response.Body.Data.usage.prompt_tokens;
                 obj.total_tokens = obj.total_tokens + ...
                     response.Body.Data.usage.total_tokens;
             else
@@ -84,7 +88,8 @@ classdef chatter < chatGPT
                     responseText = responseText + newline + "Check your API key.";
                     responseText = responseText + newline + "You may have an invalid API key.";
                 elseif string(response.StatusCode) == "404"
-                    responseText = responseText + newline + "You may not have access to the model.";
+                    responseText = responseText + newline + "You may not have access to the model: " + ...
+                        obj.model + ". Consider using another model.";
                 elseif string(response.StatusCode) == "429"
                     responseText = responseText + newline + "You exceeded the API limit. Your free trial for OpenAI API may have expired.";
                 end
