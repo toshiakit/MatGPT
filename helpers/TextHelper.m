@@ -40,6 +40,31 @@ classdef TextHelper
             report = extractBefore(report,allButFirstError);
         end
 
+        function str = extractContentfromHTML(str)
+            % extract page title
+            ttl = string(extractBetween(str,"<title>","</title>"));
+            % extract page body
+            body = string(extractBetween(str,"<body" + (">" | " ") ,"</body>","Boundaries","inclusive"));
+            % extract after <h1> tag
+            body = extractBetween(body,"<h1","</body>","Boundaries","inclusive");
+            % remove HTML comments
+            pat = "<!--" + wildcardPattern + "-->";
+            body = erase(body,pat);
+            % remove script tags
+            pat = "<script" + wildcardPattern + "/script>";
+            body = erase(body,pat);
+            % remove link tags
+            pat = "<a " + wildcardPattern + "/a>";
+            body = erase(body,pat);
+            pat = whitespacePattern + asManyOfPattern(lettersPattern(1)|"-") + "=" + ('"'|"'") + wildcardPattern + ('"'|"'");
+            body = erase(body,pat);
+            pat = ("<div>"|"</div>"|"<section>"|"/section"|"<span>"|"</span>"|"<a>"|"</a>"|"<p>"|"</p>"|"<button>"|"</button>"|"<link>");
+            body = erase(body,pat);
+            body = replace(body,asManyOfPattern(" ",2)," ");
+            body = replace(body,asManyOfPattern(newline,2),newline);
+            str = ttl + newline + body;
+        end
+
         function str = removeHTMLtags(str)
             % removeHTMLtags - removes all HTML tags from a string. This is
             % usefull because MATLAB's error messages often come with

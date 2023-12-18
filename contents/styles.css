@@ -1,3 +1,5 @@
+
+
 .table {
   display: table;
   border-collapse: collapse;
@@ -113,4 +115,25 @@ table.resp thead {
 
 tr:nth-child(even) {
   background-color: #f2f2f2;
+}
+
+body {
+  font-size: 100%;
+}
+
+
+h1 {
+  font-size: 1.2em;
+}
+
+h2 {
+  font-size: 1.1em;
+}
+
+h3, h4 {
+  font-size: 1.0em;
+}
+
+li, p {
+  font-size: 1.0em;
 }
