@@ -10,7 +10,7 @@ The app simply serves as an interface to the ChatGPT API. You should be familiar
 
 MatGPT was updated to run on the framework from the '[Large Language Models (LLMs) with MATLAB](https://github.com/matlab-deep-learning/llms-with-matlab/)' repo maintained by MathWorks.
 
-[MATLAB AI Chat Playground] (https://www.mathworks.com/matlabcentral/playground/) is a great alternative to MatGPT on MATLAB Central. 
+[MATLAB AI Chat Playground](https://www.mathworks.com/matlabcentral/playground/) is a great alternative to MatGPT on MATLAB Central. 
 
 ## What's New
 
@@ -23,7 +23,7 @@ Please note that imported content will be truncated if it exceeds the context wi
 ## Requirements
 
 * **MathWorks Products (https://www.mathworks.com)**:  To use MatGPT, you need to have MATLAB R2023a or later installed on your computer. 
-* **OpenAI API Key**: Additionally, you will need your own API key from [https://platform.openai.com/account/api-keys](https://platform.openai.com/account/api-keys). [MATLAB AI Chat Playground] (https://www.mathworks.com/matlabcentral/playground/) is a better option if you don’t want to set up an API access with OpenAI. 
+* **OpenAI API Key**: Additionally, you will need your own API key from [https://platform.openai.com/account/api-keys](https://platform.openai.com/account/api-keys). [MATLAB AI Chat Playground](https://www.mathworks.com/matlabcentral/playground/) is a better option if you don’t want to set up an API access with OpenAI. 
 * GPT-4 models are [available to all API users who have a history of successful payments](https://openai.com/blog/gpt-4-api-general-availability). If you have not made any payment to OpenAI, the model is not accessible. 
 
 ## Installation
