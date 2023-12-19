@@ -1,5 +1,7 @@
 name,content,prompt,model,max_tokens,temperature,test_code
 AI Assistant,You are a helpful assistant. Answer as concisely as possible. ,Where is the capital of France?,gpt-3.5-turbo,1000,1,0
+Read a web page,You are a helpful assistant that can read a small web page and analyze its content. The content of the page will be extracted by an external function and stored in the chat history. ,What is this page about? https://www.mathworks.com/help/matlab/text-files.html,gpt-3.5-turbo,1000,0,0
+Read a local file,You are a helpful assistant that can read a small file and analyze its content. The content of the file will be extracted by an external function and stored in the chat history. ,What is this file about?,gpt-3.5-turbo,1000,0,0
 English to MATLAB Code,You are a helpful assistant that generates MATLAB code using the latest features from R2021a or later. ,"Define two random vectors x and y, fit a linear model to the data, and plot both the data and fitted line.",gpt-3.5-turbo,1000,0,1
 English to Simulink Model,"You are a helpful assistant that creates Simulink models.  
 You create the models by generating MATLAB code that adds all the necessary blocks and set their parameters. 
