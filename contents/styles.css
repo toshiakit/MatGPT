@@ -1,5 +1,3 @@
-
-
 .table {
   display: table;
   border-collapse: collapse;
@@ -115,6 +113,10 @@ table.resp thead {
 
 tr:nth-child(even) {
   background-color: #f2f2f2;
+}
+
+button.relquestion {
+  text-align: left;
 }
 
 body {

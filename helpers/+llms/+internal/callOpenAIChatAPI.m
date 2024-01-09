@@ -19,6 +19,7 @@ function [text, message, response] = callOpenAIChatAPI(messages, functions, nvp)
 %    - FrequencyPenalty (frequence_penalty)
 %    - ApiKey
 %    - TimeOut
+%    - StreamFun
 %   More details on the parameters: https://platform.openai.com/docs/api-reference/chat/create
 %
 %   Example
@@ -65,19 +66,25 @@ arguments
     nvp.FrequencyPenalty = 0
     nvp.ApiKey = ""
     nvp.TimeOut = 10
+    nvp.StreamFun = []
 end
 
 END_POINT = "https://api.openai.com/v1/chat/completions";
 
 parameters = buildParametersCall(messages, functions, nvp);
 
-response = llms.internal.sendRequest(parameters,nvp.ApiKey, END_POINT, nvp.TimeOut);
+[response, streamedText] = llms.internal.sendRequest(parameters,nvp.ApiKey, END_POINT, nvp.TimeOut, nvp.StreamFun);
 
 % If call errors, "choices" will not be part of response.Body.Data, instead
 % we get response.Body.Data.error
 if response.StatusCode=="OK"
     % Outputs the first generation
-    message = response.Body.Data.choices(1).message;
+    if isempty(nvp.StreamFun)
+        message = response.Body.Data.choices(1).message;
+    else
+        message = struct("role", "assistant", ...
+            "content", streamedText);
+    end
     if isfield(message, "function_call")
         text = "";
     else
@@ -95,6 +102,9 @@ function parameters = buildParametersCall(messages, functions, nvp)
 
 parameters = struct();
 parameters.messages = messages;
+
+parameters.stream = ~isempty(nvp.StreamFun);
+
 if ~isempty(functions)
     parameters.functions = functions;
 end

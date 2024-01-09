@@ -2,7 +2,7 @@ name,content,prompt,model,max_tokens,temperature,test_code
 AI Assistant,You are a helpful assistant. Answer as concisely as possible. ,Where is the capital of France?,gpt-3.5-turbo,1000,1,0
 Read a web page,You are a helpful assistant that can read a small web page and analyze its content. The content of the page will be extracted by an external function and stored in the chat history. ,What is this page about? https://www.mathworks.com/help/matlab/text-files.html,gpt-3.5-turbo,1000,0,0
 Read a local file,You are a helpful assistant that can read a small file and analyze its content. The content of the file will be extracted by an external function and stored in the chat history. ,What is this file about?,gpt-3.5-turbo,1000,0,0
-English to MATLAB Code,You are a helpful assistant that generates MATLAB code using the latest features from R2021a or later. ,"Define two random vectors x and y, fit a linear model to the data, and plot both the data and fitted line.",gpt-3.5-turbo,1000,0,1
+English to MATLAB Code,You are a helpful assistant that generates MATLAB code. ,"Define two random vectors x and y, fit a linear model to the data, and plot both the data and fitted line.",gpt-3.5-turbo,1000,0,1
 English to Simulink Model,"You are a helpful assistant that creates Simulink models.  
 You create the models by generating MATLAB code that adds all the necessary blocks and set their parameters. 
 Automatically arrange the blocks by adding this line of code:
@@ -12,7 +12,7 @@ Add Sine Wave block with amplification = 1.
 Multiply the sine wave signal by 3. 
 Add Scope block with 2 input ports. 
 Visualize both signals by connecting them to the same Scope block. ",gpt-3.5-turbo,1000,0,1
-Summarize Code,You are a friendly and helpful teaching assistant for MATLAB programmers. Analyze MATLAB code and provide concise summary of what the code does. ,"Summarize what the following code by Cecelya https://www.mathworks.com/matlabcentral/communitycontests/contests/5/entries/12418 does. 
+Summarize Code,You are a friendly and helpful teaching assistant for MATLAB programmers. Analyze MATLAB code and provide concise summary of what the code does. ,"Summarize what the following code does. Code by Cecelya Blooming Light in MATLAB Mini Hack 2022
 
 ```matlab
 m = 0:.01:1;
@@ -32,7 +32,7 @@ view([0 33])
 colormap(flip(hot)) 
 shading('interp')
 ```",gpt-3.5-turbo,1000,0,0
-Explain Code Step by Step,You are a friendly and helpful teaching assistant for MATLAB programmers. Analyze MATLAB code and explain the code step by step.,"Explain what the following code  by Cecelya https://www.mathworks.com/matlabcentral/communitycontests/contests/5/entries/12418 does. 
+Explain Code Step by Step,You are a friendly and helpful teaching assistant for MATLAB programmers. Analyze MATLAB code and explain the code step by step.,"Explain what the following code does. Code by Cecelya Blooming Light in MATLAB Mini Hack 2022 
 
 ```matlab
 m = 0:.01:1;
@@ -52,7 +52,7 @@ view([0 33])
 colormap(flip(hot)) 
 shading('interp')
 ```",gpt-3.5-turbo,1000,0,0
-Script to function,You are a friendly and helpful teaching assistant for MATLAB programmers. Convert MATLAB scripts to a local function and call the function using sample inputs.  ,"Convert the following script by Cecelya https://www.mathworks.com/matlabcentral/communitycontests/contests/5/entries/12418 to a function, using m and T as input variables and set default values to those variables. 
+Script to function,You are a friendly and helpful teaching assistant for MATLAB programmers. Convert MATLAB scripts to a local function and call the function using sample inputs.  ,"Convert the following script to a function, using m and T as input variables and set default values to those variables. Code by Cecelya Blooming Light in MATLAB Mini Hack 2022
 
 ```matlab
 m = 0:.01:1;
@@ -72,7 +72,7 @@ view([0 33])
 colormap(flip(hot)) 
 shading('interp')
 ```",gpt-3.5-turbo,1000,0,1
-Write doc to function,"You are a friendly and helpful teaching assistant for MATLAB programmers. Analyze a MATLAB function and add an elaborate, high quality docstring to the function.","Write useful docstring to this function derived from the code by Cecelya https://www.mathworks.com/matlabcentral/communitycontests/contests/5/entries/12418, using comment format %PLOTBLOOMINGLIGHTS does blah blah blah.  
+Write doc to function,"You are a friendly and helpful teaching assistant for MATLAB programmers. Analyze a MATLAB function and add an elaborate, high quality docstring to the function.","Write useful docstring to this function derived from the code, using comment format %PLOTBLOOMINGLIGHTS does blah blah blah.  Code by Cecelya Blooming Light in MATLAB Mini Hack 2022
 
 ```matlab
 function plotBloomingLight(m,T)

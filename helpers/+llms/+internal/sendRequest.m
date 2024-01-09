@@ -1,9 +1,7 @@
-function response = sendRequest(parameters, token, endpoint, timeout)
-% This function is undocumented and will change in a future release
-
+function [response, streamedText] = sendRequest(parameters, token, endpoint, timeout, streamFun)
 %sendRequest Sends a request to an ENDPOINT using PARAMETERS and
 %   api key TOKEN. TIMEOUT is the nubmer of seconds to wait for initial
-%   server connection.
+%   server connection. STREAMFUN is an optional callback function.
 
 %   Copyright 2023 The MathWorks, Inc.
 
@@ -12,6 +10,7 @@ arguments
     token
     endpoint
     timeout
+    streamFun = []
 end
 
 % Define the headers for the API request
@@ -24,9 +23,18 @@ request = matlab.net.http.RequestMessage('post',headers,parameters);
 
 % Create a HTTPOptions object;
 httpOpts = matlab.net.http.HTTPOptions;
-% Set the ConnectTimeout option
 
+% Set the ConnectTimeout option
 httpOpts.ConnectTimeout = timeout;
+
 % Send the request and store the response
-response = send(request, matlab.net.URI(endpoint),httpOpts);
+if isempty(streamFun)
+    response = send(request, matlab.net.URI(endpoint),httpOpts);
+    streamedText = "";
+else
+    % User defined a stream callback function
+    consumer = llms.stream.responseStreamer(streamFun);
+    response = send(request, matlab.net.URI(endpoint),httpOpts,consumer);
+    streamedText = consumer.ResponseText;
+end
 end

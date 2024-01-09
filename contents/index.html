@@ -16,34 +16,50 @@
 
             function setup(htmlComponent) {
 
+                // Detect button click
+                let body = document.getElementsByTagName("body")[0];
+                body.addEventListener("click", function(event) {
+                    if (event.target.nodeName == "BUTTON" && event.target.className == "relquestion") {
+                        let prompt = event.target.innerHTML;
+                        htmlComponent.Data = prompt;
+                    }
+                })
+
+                // Detect data change
                 htmlComponent.addEventListener("DataChanged", function(event) { 
                     // Get a reference to the table
                     var table = document.querySelector('.table');
                     var changedData = htmlComponent.Data;
                     
-                    // Create a new row
-                    var newRow = document.createElement('div');
-                    newRow.classList.add('table-row');
-
-                    // Create the two cells in the new row
-                    var cell1 = document.createElement('div');
-                    cell1.classList.add('table-cell');                    
-                    var cell2 = document.createElement('div');
-                    cell2.classList.add('table-cell');
-            
-
-                    // Add Role text in 1st cell
-                    cell1.innerHTML = changedData[0];                
-                    cell2.innerHTML = changedData[1]; 
+                    if (changedData[2] == "new") {
+                        // Create a new row
+                        var newRow = document.createElement('div');
+                        newRow.classList.add('table-row');
+                        
+                        // Create the two cells in the new row
+                        var cell1 = document.createElement('div');
+                        cell1.classList.add('table-cell');                    
+                        var cell2 = document.createElement('div');
+                        cell2.classList.add('table-cell');
+                        
+                        // Add the changed data to the cells
+                        cell1.innerHTML = changedData[0];                
+                        cell2.innerHTML = changedData[1]; 
                     
-                    // Add the cells to the new row
-                    newRow.appendChild(cell1);
-                    newRow.appendChild(cell2);
+                        // Add the cells to the new row
+                        newRow.appendChild(cell1);
+                        newRow.appendChild(cell2);
                     
-                    // Add the new row to the table
-                    table.appendChild(newRow);
+                        // Add the new row to the table
+                        table.appendChild(newRow);
+                    } else {
+                        // Get the last cell of the last row
+                        var lastRow = table.children[table.children.length - 1];
+                        var lastCell = lastRow.children[lastRow.children.length - 1];
+                        // Add the changed data to the cell
+                        lastCell.innerHTML = changedData[1];
+                    }
                 });
-
             }
         </script>
     </body>
