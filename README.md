@@ -17,7 +17,8 @@ MatGPT was updated to run on the framework from the '[Large Language Models (LLM
 * MatGPT runs on the 'LLMs with MATLAB' framework, which requires MATLAB R2023a or later. 
 * MatGPT supports streaming API where response tokens are displayed as they come in.
 * MatGPT detects a URL included in a prompt, and retrieve its web content into the chat.
-* MatGPT lets you import a .m, .mlx, .csv or .txt file into the chat. 
+* MatGPT lets you import a .m, .mlx, .csv or .txt file into the chat. PDF files are also supported if Text Analytics Toolbox is available.
+* MatGPT supports GPT-4 Turbo with Vision. You can pass the URL to an image or a local image file path ask questions about the image. 
 
 Please note that imported content will be truncated if it exceeds the context window limit. 
 
