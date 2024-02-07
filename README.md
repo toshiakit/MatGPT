@@ -15,16 +15,18 @@ MatGPT was updated to run on the framework from the '[Large Language Models (LLM
 ## What's New
 
 * MatGPT runs on the 'LLMs with MATLAB' framework, which requires MATLAB R2023a or later. 
+* MatGPT supports streaming API where response tokens are displayed as they come in.
 * MatGPT detects a URL included in a prompt, and retrieve its web content into the chat.
-* MatGPT lets you import a .m, .mlx, or .csv file into the chat. 
+* MatGPT lets you import a .m, .mlx, .csv or .txt file into the chat. PDF files are also supported if Text Analytics Toolbox is available.
+* MatGPT supports GPT-4 Turbo with Vision. You can pass the URL to an image or a local image file path ask questions about the image. 
 
 Please note that imported content will be truncated if it exceeds the context window limit. 
 
 ## Requirements
 
-* **MathWorks Products (https://www.mathworks.com)**:  To use MatGPT, you need to have MATLAB R2023a or later installed on your computer. 
-* **OpenAI API Key**: Additionally, you will need your own API key from [https://platform.openai.com/account/api-keys](https://platform.openai.com/account/api-keys). [MATLAB AI Chat Playground](https://www.mathworks.com/matlabcentral/playground/) is a better option if you don’t want to set up an API access with OpenAI. 
-* GPT-4 models are [available to all API users who have a history of successful payments](https://openai.com/blog/gpt-4-api-general-availability). If you have not made any payment to OpenAI, the model is not accessible. 
+* **MathWorks Products (https://www.mathworks.com)**: Use MatGPT to run on [MATLAB Online](https://www.mathworks.com/products/matlab-online.html) that comes with the most commonly used toolboxes. To use it on desktop, you must have MATLAB R2023a or later installed on your computer. 
+* **OpenAI API Key**: Additionally, you will need your own API key from [https://platform.openai.com/account/api-keys](https://platform.openai.com/account/api-keys). If you don’t want to set up an API access with OpenAI, [MATLAB AI Chat Playground](https://www.mathworks.com/matlabcentral/playground/) is a better option. 
+* GPT-4 models are [available to all API users who have a history of successful payments](https://openai.com/blog/gpt-4-api-general-availability). If you have not made any payment to OpenAI, the GPT-4 models are not accessible. 
 
 ## Installation
 
@@ -49,7 +51,7 @@ To use MatGPT on MATLAB Online, simply click [![Open in MATLAB Online](https://w
 * The paperclip button lets you include the content of a m-file, live script file or csv file in the chat.
 * If the prompt contains a URL, MatGPT ask you to confirm that you want to open the page. 
 * The `Send` button and Paperclip button are disabled until a chat is configured in the `Settings` tab.
-* If you want suggestion for follow-up questions in the response, check `Suggest follow-up questions` checkbox. 
+* If you want suggestion for follow-up questions in the response, check `Suggest follow-up questions` checkbox. Suggested questions appear as clickable buttons. You can copy a suggested question to the prompt box by clicking it.  
 * If your prompt is intended to generate MATLAB code, check `Test Generated MATLAB Code` checkbox to test the returned code.
 * The `Usage` tab shows the number of tokens used in the current chat session. 
 * Add stop sequences in `Advanced` tab to specify the sequences where the API will stop generating further tokens
@@ -59,7 +61,8 @@ To use MatGPT on MATLAB Online, simply click [![Open in MATLAB Online](https://w
 
 ### Note:
 
-You can increase the connection timeout in the `Settings`. You can add proxy via [Web Preferences](https://www.mathworks.com/help/matlab/ref/preferences.html) in MATLAB.
+* You can increase the connection timeout in the `Settings`. You can add proxy via [Web Preferences](https://www.mathworks.com/help/matlab/ref/preferences.html) in MATLAB.
+* Streaming is enabled by default, but you can turn it off in the `Settings` tab. Usage data is not available in streaming mode. 
 
 ## What happened to chatGPT class?
 

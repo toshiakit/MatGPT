@@ -1,4 +1,5 @@
-*.mlx
+*.env
+*.asv
 contents/ChatData.mat
 contents/GeneratedCode/
-helpers/*.asv
+startup.m
