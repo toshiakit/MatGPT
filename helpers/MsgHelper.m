@@ -126,6 +126,15 @@ classdef MsgHelper
                     characterListPattern("./_-:;%&?#"), 1);
             url = extract(content,urlPat);
         end
+
+        function imgTag = getHTMLImgTag(filepath)
+            fid = fopen(filepath);
+            byteArray = fread(fid,'*uint8');
+            fclose(fid);
+            b64char = matlab.net.base64encode(byteArray);
+            urlEncoded = "data:image/jpg;base64," + b64char;
+            imgTag = "<img src=" + urlEncoded + ">";
+        end
  
     end
 end
