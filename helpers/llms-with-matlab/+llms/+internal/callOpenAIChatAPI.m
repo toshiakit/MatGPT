@@ -131,7 +131,7 @@ dict = mapNVPToParameters;
 
 nvpOptions = keys(dict);
 if strcmp(nvp.ModelName,'gpt-4-vision-preview')
-    nvpOptions(ismember(nvpOptions,["MaxNumTokens","StopSequences"])) = [];
+    nvpOptions(ismember(nvpOptions,"StopSequences")) = [];
 end
 
 for opt = nvpOptions.'

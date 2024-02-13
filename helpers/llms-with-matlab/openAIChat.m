@@ -209,8 +209,8 @@ classdef(Sealed) openAIChat
             %                          reproducible responses
             %                           
             % Currently, GPT-4 Turbo with vision does not support the message.name 
-            % parameter, functions/tools, response_format parameter, stop
-            % sequences, and max_tokens
+            % parameter, functions/tools, response_format parameter, and stop
+            % sequences. It also has a low MaxNumTokens default, which can be overridden.
 
             arguments
                 this                    (1,1) openAIChat
@@ -219,11 +219,6 @@ classdef(Sealed) openAIChat
                 nvp.MaxNumTokens        (1,1) {mustBePositive} = inf
                 nvp.ToolChoice          {mustBeValidFunctionCall(this, nvp.ToolChoice)} = []
                 nvp.Seed                {mustBeIntegerOrEmpty(nvp.Seed)} = []
-            end
-
-            if nvp.MaxNumTokens ~= Inf && strcmp(this.ModelName,'gpt-4-vision-preview')
-                error("llms:invalidOptionForModel", ...
-                        llms.utils.errorMessageCatalog.getMessage("llms:invalidOptionForModel", "MaxNumTokens", this.ModelName));
             end
 
             toolChoice = convertToolChoice(this, nvp.ToolChoice);
