@@ -16,11 +16,15 @@ MatGPT was updated to run on the framework from the '[Large Language Models (LLM
 
 * MatGPT runs on the 'LLMs with MATLAB' framework, which requires MATLAB R2023a or later. 
 * MatGPT supports streaming API where response tokens are displayed as they come in.
-* MatGPT detects a URL included in a prompt, and retrieve its web content into the chat.
+* MatGPT detects a URL included in a prompt, and retrieves its web content into the chat.
 * MatGPT lets you import a .m, .mlx, .csv or .txt file into the chat. PDF files are also supported if Text Analytics Toolbox is available.
-* MatGPT supports GPT-4 Turbo with Vision. You can pass the URL to an image or a local image file path ask questions about the image. 
+* MatGPT supports GPT-4 Turbo with Vision. You can pass the URL to an image, or a local image file path ask questions about the image.
+* MatGPT lets you generate an image via DALL·E 3 with models that support function calling. 
 
-Please note that imported content will be truncated if it exceeds the context window limit. 
+Please note that:
+
+* imported content will be truncated if it exceeds the context window limit.
+* Streaming must be disabled to use image generation via function calling. 
 
 ## Requirements
 
@@ -54,7 +58,7 @@ To use MatGPT on MATLAB Online, simply click [![Open in MATLAB Online](https://w
 * If you want suggestion for follow-up questions in the response, check `Suggest follow-up questions` checkbox. Suggested questions appear as clickable buttons. You can copy a suggested question to the prompt box by clicking it.  
 * If your prompt is intended to generate MATLAB code, check `Test Generated MATLAB Code` checkbox to test the returned code.
 * The `Usage` tab shows the number of tokens used in the current chat session. 
-* Add stop sequences in `Advanced` tab to specify the sequences where the API will stop generating further tokens
+* Add stop sequences in `Advanced` tab to specify the sequences where the API will stop generating further tokens.
 4. Continue the conversation by keep adding more prompts and clicking `Send`. 
 5. You can right-click or double-click a chat in the left navigation panel to rename, delete, or save the chat to a text file. 
 6. When you close the app, the chat will be saved and will be reloaded into the left nav when you relaunch the app.

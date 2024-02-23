@@ -37,7 +37,8 @@ classdef MsgHelper
                 "<ul><li>Runs on the <a href='https://github.com/matlab-deep-learning/llms-with-matlab' target='_blank'>LLMs with MATLAB</a> framework, which requires MATLAB R2023a or later</li>" + ...
                 "<li>Detects a URL included in a prompt, and retrieve its content into the chat.</<li>" + ...
                 "<li>Lets you import a .m, .mlx, .csv, or .txt file into the chat</li>" + ...
-                "<li>Supports GPT-4 Turbo with Vision with .jpg, .png or .gif images</li></ul>" + ...
+                "<li>Supports GPT-4 Turbo with Vision with .jpg, .png or .gif images</li>" + ...
+                "<li>Supports image generation via DALLe-3 API when streaming is disabled</li></ul>" + ...
                 "<strong>Notes</strong>:" + ...
                 "<ul><li>Imported content will be truncated if it exceeds the context window limit.</li>" + ...
                 "<li>PDF file is supported if Text Analytics Toolbox is available.</li></ul>"];
@@ -127,13 +128,24 @@ classdef MsgHelper
             url = extract(content,urlPat);
         end
 
+        % generate base64 encoded img tag
         function imgTag = getHTMLImgTag(filepath)
+            [~,~,ext] = fileparts(filepath);
+            MIMEType = "data:image/" + erase(ext,".") + ";base64,";
             fid = fopen(filepath);
             byteArray = fread(fid,'*uint8');
             fclose(fid);
             b64char = matlab.net.base64encode(byteArray);
-            urlEncoded = "data:image/jpg;base64," + b64char;
-            imgTag = "<img src=" + urlEncoded + ">";
+            urlEncoded = MIMEType + b64char;
+            imgTag = "<img width=512 src=" + urlEncoded + ">";
+        end
+
+        % function call to generate image
+        function [image, url, response] = generateImage(prompt)
+            mdl = openAIImages(ModelName="dall-e-3");
+            [images, response] = generate(mdl,string(prompt));
+            image = images{1};
+            url = response.Body.Data.data.url;
         end
  
     end
