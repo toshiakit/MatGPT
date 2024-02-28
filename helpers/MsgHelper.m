@@ -75,7 +75,9 @@ classdef MsgHelper
             % remove test reports before sending user prompt    
 
             % extract content from messages
-            contents = cellfun(@(x) x.content, messages.Messages);
+            contents = strings(size(messages.Messages));
+            isText = ~cellfun(@(x) isempty(x.content), messages.Messages);
+            contents(isText) = cellfun(@(x) x.content, messages.Messages(isText));
             isTestReport = startsWith(contents,'<div class="test-report">');
             if any(isTestReport)
                 idx1 = find(isTestReport);
