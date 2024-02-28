@@ -149,6 +149,14 @@ classdef MsgHelper
             image = images{1};
             url = response.Body.Data.data.url;
         end
+
+        % function call to understand image
+        function [txt,message,response] = understandImage(prompt,image,max_tokens)
+            chat = openAIChat("You are an AI assistant","ModelName","gpt-4-vision-preview");
+            messages = openAIMessages;
+            messages = addUserMessageWithImages(messages,prompt,image);
+            [txt,message,response] = generate(chat,messages,MaxNumTokens=max_tokens);
+        end
  
     end
 end
