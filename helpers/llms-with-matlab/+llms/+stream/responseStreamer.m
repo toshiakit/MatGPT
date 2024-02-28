@@ -36,14 +36,44 @@ classdef responseStreamer < matlab.net.http.io.StringConsumer
             str = erase(str,"data: ");
 
             for i = 1:length(str)
-                json = jsondecode(str{i});
-                if strcmp(json.choices.finish_reason,'stop')
+                if strcmp(str{i},'[DONE]')
                     stop = true;
                     return
                 else
-                    txt = json.choices.delta.content;
-                    this.StreamFun(txt);
-                    this.ResponseText = [this.ResponseText txt];
+                    try
+                        json = jsondecode(str{i});
+                    catch ME
+                        errID = 'llms:stream:responseStreamer:InvalidInput';
+                        msg = "Input does not have the expected json format. " + str{i};
+                        causeException = MException(errID,msg);
+                        ME = addCause(ME,causeException);
+                        rethrow(ME)
+                    end
+                    if ischar(json.choices.finish_reason) && ismember(json.choices.finish_reason,["stop","tool_calls"])
+                        stop = true;
+                        return
+                    else
+                        if isfield(json.choices.delta,"tool_calls")
+                            if isfield(json.choices.delta.tool_calls,"id")
+                                id = json.choices.delta.tool_calls.id;
+                                type = json.choices.delta.tool_calls.type;
+                                fcn = json.choices.delta.tool_calls.function;
+                                s = struct('id',id,'type',type,'function',fcn);
+                                txt = jsonencode(s);
+                            else
+                                s = jsondecode(this.ResponseText);
+                                args = json.choices.delta.tool_calls.function.arguments;
+                                s.function.arguments = [s.function.arguments args];
+                                txt = jsonencode(s);
+                            end
+                            this.StreamFun('');
+                            this.ResponseText = txt;
+                        else
+                            txt = json.choices.delta.content;
+                            this.StreamFun(txt);
+                            this.ResponseText = [this.ResponseText txt];
+                        end
+                    end
                 end
             end
         end
