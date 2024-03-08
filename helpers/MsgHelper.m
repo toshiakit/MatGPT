@@ -16,7 +16,8 @@ classdef MsgHelper
                 struct('name','gpt-4-0613','attributes',struct('contextwindow',8192,'cutoff','Sep 2021'),'legacy',false), ...
                 struct('name','gpt-4-1106-preview','attributes',struct('contextwindow',128000,'cutoff','Apr 2023'),'legacy',false), ...
                 struct('name','gpt-4-vision-preview','attributes',struct('contextwindow',128000,'cutoff','Apr 2023'),'legacy',false), ...
-                struct('name','gpt-4-turbo-preview','attributes',struct('contextwindow',128000,'cutoff','Apr 2023'),'legacy',false) ...
+                struct('name','gpt-4-turbo-preview','attributes',struct('contextwindow',128000,'cutoff','Apr 2023'),'legacy',false), ...
+                struct('name','dall-e-3','attributes',struct('contextwindow','n/a','cutoff','n/a'),'legacy',false), ...
                 ];
             contextwindow = models(arrayfun(@(x) string(x.name), models) == modelName).attributes.contextwindow;
             cutoff = models(arrayfun(@(x) string(x.name), models) == modelName).attributes.cutoff;
@@ -65,7 +66,7 @@ classdef MsgHelper
             args = "{""arg1"": 1 }";
             funCall = struct("name", functionName, "arguments", args);
             toolCall = struct("id", id, "type", "function", "function", funCall);
-            toolCallPrompt = struct("role", "assistant", "content", "", "tool_calls", toolCall);
+            toolCallPrompt = struct("role", "assistant", "content", [], "tool_calls", toolCall);
             messages = addResponseMessage(messages, toolCallPrompt);
             % add content as the function result
             messages = addToolMessage(messages,id,functionName,content);
@@ -142,21 +143,5 @@ classdef MsgHelper
             imgTag = "<img width=512 src=" + urlEncoded + ">";
         end
 
-        % function call to generate image
-        function [image, url, response] = generateImage(prompt)
-            mdl = openAIImages(ModelName="dall-e-3");
-            [images, response] = generate(mdl,string(prompt));
-            image = images{1};
-            url = response.Body.Data.data.url;
-        end
-
-        % function call to understand image
-        function [txt,message,response] = understandImage(prompt,image,max_tokens)
-            chat = openAIChat("You are an AI assistant","ModelName","gpt-4-vision-preview");
-            messages = openAIMessages;
-            messages = addUserMessageWithImages(messages,prompt,image);
-            [txt,message,response] = generate(chat,messages,MaxNumTokens=max_tokens);
-        end
- 
     end
 end
