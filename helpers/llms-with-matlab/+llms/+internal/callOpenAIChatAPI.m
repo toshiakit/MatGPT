@@ -84,8 +84,20 @@ if response.StatusCode=="OK"
     if isempty(nvp.StreamFun)
         message = response.Body.Data.choices(1).message;
     else
-        message = struct("role", "assistant", ...
-            "content", streamedText);
+        pat = '{"' + wildcardPattern + '":';
+        if contains(streamedText,pat)
+            s = jsondecode(streamedText);
+            if contains(s.function.arguments,pat)
+                prompt = jsondecode(s.function.arguments);
+                s.function.arguments = prompt;
+            end
+            message = struct("role", "assistant", ...
+                 "content",[], ...
+                 "tool_calls",jsondecode(streamedText));
+        else
+            message = struct("role", "assistant", ...
+                "content", streamedText);
+        end
     end
     if isfield(message, "tool_choice")
         text = "";
@@ -131,7 +143,7 @@ dict = mapNVPToParameters;
 
 nvpOptions = keys(dict);
 if strcmp(nvp.ModelName,'gpt-4-vision-preview')
-    nvpOptions(ismember(nvpOptions,["MaxNumTokens","StopSequences"])) = [];
+    nvpOptions(ismember(nvpOptions,"StopSequences")) = [];
 end
 
 for opt = nvpOptions.'

@@ -16,7 +16,8 @@ classdef MsgHelper
                 struct('name','gpt-4-0613','attributes',struct('contextwindow',8192,'cutoff','Sep 2021'),'legacy',false), ...
                 struct('name','gpt-4-1106-preview','attributes',struct('contextwindow',128000,'cutoff','Apr 2023'),'legacy',false), ...
                 struct('name','gpt-4-vision-preview','attributes',struct('contextwindow',128000,'cutoff','Apr 2023'),'legacy',false), ...
-                struct('name','gpt-4-turbo-preview','attributes',struct('contextwindow',128000,'cutoff','Apr 2023'),'legacy',false) ...
+                struct('name','gpt-4-turbo-preview','attributes',struct('contextwindow',128000,'cutoff','Apr 2023'),'legacy',false), ...
+                struct('name','dall-e-3','attributes',struct('contextwindow','n/a','cutoff','n/a'),'legacy',false), ...
                 ];
             contextwindow = models(arrayfun(@(x) string(x.name), models) == modelName).attributes.contextwindow;
             cutoff = models(arrayfun(@(x) string(x.name), models) == modelName).attributes.cutoff;
@@ -37,7 +38,8 @@ classdef MsgHelper
                 "<ul><li>Runs on the <a href='https://github.com/matlab-deep-learning/llms-with-matlab' target='_blank'>LLMs with MATLAB</a> framework, which requires MATLAB R2023a or later</li>" + ...
                 "<li>Detects a URL included in a prompt, and retrieve its content into the chat.</<li>" + ...
                 "<li>Lets you import a .m, .mlx, .csv, or .txt file into the chat</li>" + ...
-                "<li>Supports GPT-4 Turbo with Vision with .jpg, .png or .gif images</li></ul>" + ...
+                "<li>Supports GPT-4 Turbo with Vision with .jpg, .png or .gif images</li>" + ...
+                "<li>Supports image generation via DALLe-3 API when streaming is disabled</li></ul>" + ...
                 "<strong>Notes</strong>:" + ...
                 "<ul><li>Imported content will be truncated if it exceeds the context window limit.</li>" + ...
                 "<li>PDF file is supported if Text Analytics Toolbox is available.</li></ul>"];
@@ -64,7 +66,7 @@ classdef MsgHelper
             args = "{""arg1"": 1 }";
             funCall = struct("name", functionName, "arguments", args);
             toolCall = struct("id", id, "type", "function", "function", funCall);
-            toolCallPrompt = struct("role", "assistant", "content", "", "tool_calls", toolCall);
+            toolCallPrompt = struct("role", "assistant", "content", [], "tool_calls", toolCall);
             messages = addResponseMessage(messages, toolCallPrompt);
             % add content as the function result
             messages = addToolMessage(messages,id,functionName,content);
@@ -74,7 +76,9 @@ classdef MsgHelper
             % remove test reports before sending user prompt    
 
             % extract content from messages
-            contents = cellfun(@(x) x.content, messages.Messages);
+            contents = strings(size(messages.Messages));
+            isText = ~cellfun(@(x) isempty(x.content), messages.Messages);
+            contents(isText) = cellfun(@(x) x.content, messages.Messages(isText));
             isTestReport = startsWith(contents,'<div class="test-report">');
             if any(isTestReport)
                 idx1 = find(isTestReport);
@@ -126,6 +130,18 @@ classdef MsgHelper
                     characterListPattern("./_-:;%&?#"), 1);
             url = extract(content,urlPat);
         end
- 
+
+        % generate base64 encoded img tag
+        function imgTag = getHTMLImgTag(filepath)
+            [~,~,ext] = fileparts(filepath);
+            MIMEType = "data:image/" + erase(ext,".") + ";base64,";
+            fid = fopen(filepath);
+            byteArray = fread(fid,'*uint8');
+            fclose(fid);
+            b64char = matlab.net.base64encode(byteArray);
+            urlEncoded = MIMEType + b64char;
+            imgTag = "<img width=512 src=" + urlEncoded + ">";
+        end
+
     end
 end
