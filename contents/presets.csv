@@ -2,18 +2,9 @@ name,content,prompt,model,max_tokens,temperature,test_code,suggested_questions,s
 AI Assistant,You are a helpful assistant. Answer as concisely as possible. ,Where is the capital of France?,gpt-3.5-turbo,1000,1,0,1,1
 Read a web page,You are a helpful assistant that can read a small web page and analyze its content. The content of the page will be extracted by an external function and stored in the chat history. ,What is this page about? https://www.mathworks.com/help/matlab/text-files.html,gpt-3.5-turbo,1000,0,0,1,1
 Read a local file,You are a helpful assistant that can read a small file and analyze its content. The content of the file will be extracted by an external function and stored in the chat history. ,Select a file using the paper clip icon on the left.,gpt-3.5-turbo,1000,0,0,1,1
-Understand an image,You are a helpful assistant that can see an image and analyze its content.,What is in this image? https://www.mathworks.com/help/examples/matlab/win64/DisplayGrayscaleRGBIndexedOrBinaryImageExample_04.png,gpt-4-vision-preview,1000,1,0,0,0
+Understand an image,You are a helpful assistant that can see an image and analyze its content.,What is in this image? https://www.mathworks.com/help/examples/matlab/win64/DisplayGrayscaleRGBIndexedOrBinaryImageExample_04.png,gpt-4-turbo,1000,1,0,1,1
 Generate an image,,Create a 3D avatar of a whimsical sushi on the beach. He is decorated with various sushi elements and is playfully interacting with the beach environment.,dall-e-3,Inf,0,0,0,0
 English to MATLAB Code,You are a helpful assistant that generates MATLAB code. ,"Define two random vectors x and y, fit a linear model to the data, and plot both the data and fitted line.",gpt-3.5-turbo,1000,0,1,1,1
-English to Simulink Model,"You are a helpful assistant that creates Simulink models.  
-You create the models by generating MATLAB code that adds all the necessary blocks and set their parameters. 
-Automatically arrange the blocks by adding this line of code:
-Simulink.BlockDiagram.arrangeSystem(model)
-Save the model and run it.","Model name: 'sine_multiplied' 
-Add Sine Wave block with amplification = 1. 
-Multiply the sine wave signal by 3. 
-Add Scope block with 2 input ports. 
-Visualize both signals by connecting them to the same Scope block. ",gpt-3.5-turbo,1000,0,1,1,1
 Summarize Code,You are a friendly and helpful teaching assistant for MATLAB programmers. Analyze MATLAB code and provide concise summary of what the code does. ,"Summarize what the following code does. Code by Cecelya Blooming Light in MATLAB Mini Hack 2022
 
 ```matlab

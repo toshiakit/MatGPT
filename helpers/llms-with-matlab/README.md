@@ -5,20 +5,36 @@ This repository contains example code to demonstrate how to connect MATLAB to th
 The functionality shown here serves as an interface to the ChatGPT and DALL·E APIs. To start using the OpenAI APIs, you first need to obtain OpenAI API keys. You are responsible for any fees OpenAI may charge for the use of their APIs. You should be familiar with the limitations and risks associated with using this technology, and you agree that you shall be solely responsible for full compliance with any terms that may apply to your use of the OpenAI APIs.
 
 Some of the current LLMs supported are:
-- gpt-3.5-turbo, gpt-3.5-turbo-1106
-- gpt-4, gpt-4-1106-preview
-- gpt-4-vision-preview (a.k.a. GPT-4 Turbo with Vision)
+- gpt-3.5-turbo, gpt-3.5-turbo-1106, gpt-3.5-turbo-0125
+- gpt-4-turbo, gpt-4-turbo-2024-04-09 (GPT-4 Turbo with Vision)
+- gpt-4, gpt-4-0613
 - dall-e-2, dall-e-3
-
+                                                        
 For details on the specification of each model, check the official [OpenAI documentation](https://platform.openai.com/docs/models).
+
+## Requirements
+
+### MathWorks Products (https://www.mathworks.com)
+
+- Requires MATLAB release R2024a or newer.
+- Some examples require Text Analytics Toolbox™.
+
+### 3rd Party Products:
+
+- An active OpenAI API subscription and API key.
 
 ## Setup
 
-If you would like to use this repository with MATLAB Online, simply click [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=matlab-deep-learning/llms-with-matlab)
+### MATLAB Online
 
-If you would like to use it with MATLAB Desktop, proceed with the following steps:
+To use this repository with MATLAB Online, click [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=matlab-deep-learning/llms-with-matlab)
 
-1. Clone the repository to your local machine.
+
+### MATLAB Desktop
+
+To use this repository with a local installation of MATLAB, first clone the repository. 
+
+1. In the system command prompt, run:
 
     ```bash
     git clone https://github.com/matlab-deep-learning/llms-with-matlab.git
@@ -32,26 +48,19 @@ If you would like to use it with MATLAB Desktop, proceed with the following step
     addpath('path/to/llms-with-matlab');
     ```
 
-4. Set up your OpenAI API key. Create a `.env` file in the project root directory with the following content.
+### Setting up your API key
 
-    ```
-    OPENAI_API_KEY=<your key>
-    ```
+Set up your OpenAI API key. Create a `.env` file in the project root directory with the following content.
+
+```
+OPENAI_API_KEY=<your key>
+```
     
-    Then load your `.env` file as follows:
+Then load your `.env` file as follows:
 
-    ```matlab
-    loadenv(".env")
-    ```
-
-### MathWorks Products (https://www.mathworks.com)
-
-- Requires MATLAB release R2023a or newer.
-
-### 3rd Party Products:
-
-- An active OpenAI API subscription and API key.
-
+```matlab
+loadenv(".env")
+```
 
 ## Getting Started with Chat Completion API
 
@@ -278,13 +287,13 @@ You can extract the arguments and write the data to a table, for example.
 
 ### Understand the content of an image
 
-You can use gpt-4-vision-preview to experiment with image understanding. 
+You can use gpt-4-turbo to experiment with image understanding. 
 ```matlab
-chat = openAIChat("You are an AI assistant.", ModelName="gpt-4-vision-preview"); 
+chat = openAIChat("You are an AI assistant.", ModelName="gpt-4-turbo");
 image_path = "peppers.png";
 messages = openAIMessages;
 messages = addUserMessageWithImages(messages,"What is in the image?",image_path);
-[txt,response] = generate(chat,messages);
+[txt,response] = generate(chat,messages,MaxNumTokens=4096);
 % Should output the description of the image
 ```
 
@@ -320,15 +329,16 @@ imshow(images{1})
 ## Examples
 To learn how to use this in your workflows, see [Examples](/examples/).
 
-- [ExampleStreaming.mlx](/examples/ExampleStreaming.mlx): Learn to implement a simple chat that stream the response. 
-- [ExampleSummarization.mlx](/examples/ExampleSummarization.mlx): Learn to create concise summaries of long texts with ChatGPT. (Requires Text Analytics Toolbox™)
-- [ExampleChatBot.mlx](/examples/ExampleChatBot.mlx): Build a conversational chatbot capable of handling various dialogue scenarios using ChatGPT. (Requires Text Analytics Toolbox)
-- [ExampleFunctionCalling.mlx](/examples/ExampleFunctionCalling.mlx): Learn how to create agents capable of executing MATLAB functions. 
+- [ProcessGeneratedTextinRealTimebyUsingChatGPTinStreamingMode.mlx](/examples/ProcessGeneratedTextinRealTimebyUsingChatGPTinStreamingMode.mlx): Learn to implement a simple chat that stream the response. 
+- [SummarizeLargeDocumentsUsingChatGPTandMATLAB.mlx](/examples/SummarizeLargeDocumentsUsingChatGPTandMATLAB.mlx): Learn to create concise summaries of long texts with ChatGPT. (Requires Text Analytics Toolbox™)
+- [CreateSimpleChatBot.mlx](/examples/CreateSimpleChatBot.mlx): Build a conversational chatbot capable of handling various dialogue scenarios using ChatGPT. (Requires Text Analytics Toolbox)
+- [AnalyzeScientificPapersUsingFunctionCalls.mlx](/examples/AnalyzeScientificPapersUsingFunctionCalls.mlx): Learn how to create agents capable of executing MATLAB functions. 
 - [ExampleParallelFunctionCalls.mlx](/examples/ExampleParallelFunctionCalls.mlx): Learn how to take advantage of parallel function calling. 
-- [ExampleRetrievalAugmentedGeneration.mlx](/examples/ExampleRetrievalAugmentedGeneration.mlx): Learn about retrieval augmented generation with a simple use case. (Requires Text Analytics Toolbox™)
-- [ExampleGPT4Vision.mlx](/examples/ExampleGPT4Vision.mlx): Learn how to use GPT-4 Turbo with Vision to understand the content of an image. 
-- [ExampleJSONMode.mlx](/examples/ExampleJSONMode.mlx): Learn how to use JSON mode in chat completions
-- [ExampleDALLE.mlx](/examples/ExampleDALLE.mlx): Learn how to generate images, create variations and edit the images. 
+- [RetrievalAugmentedGenerationUsingChatGPTandMATLAB.mlx](/examples/RetrievalAugmentedGenerationUsingChatGPTandMATLAB.mlx): Learn about retrieval augmented generation with a simple use case. (Requires Text Analytics Toolbox™)
+- [DescribeImagesUsingChatGPT.mlx](/examples/DescribeImagesUsingChatGPT.mlx): Learn how to use GPT-4 Turbo with Vision to understand the content of an image. 
+- [AnalyzeSentimentinTextUsingChatGPTinJSONMode.mlx](/examples/AnalyzeSentimentinTextUsingChatGPTinJSONMode.mlx): Learn how to use JSON mode in chat completions
+- [UsingDALLEToEditImages.mlx](/examples/UsingDALLEToEditImages.mlx): Learn how to generate images
+- [UsingDALLEToGenerateImages.mlx](/examples/UsingDALLEToGenerateImages.mlx): Create variations of images and editimages. 
 
 ## License
 
