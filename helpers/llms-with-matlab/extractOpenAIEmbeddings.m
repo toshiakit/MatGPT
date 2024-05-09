@@ -20,14 +20,14 @@ function [emb, response] = extractOpenAIEmbeddings(text, nvp)
 %   [emb, response] = EXTRACTOPENAIEMBEDDINGS(...) also returns the full
 %   response from the OpenAI API call.
 %
-%   Copyright 2023 The MathWorks, Inc.
+%   Copyright 2023-2024 The MathWorks, Inc.
 
 arguments
-    text           (1,:) {mustBeText}
+    text           (1,:) {mustBeNonzeroLengthText}
     nvp.ModelName  (1,1) {mustBeMember(nvp.ModelName,["text-embedding-ada-002", ...
                         "text-embedding-3-large", "text-embedding-3-small"])} = "text-embedding-ada-002"
     nvp.TimeOut    (1,1) {mustBeReal,mustBePositive} = 10
-    nvp.Dimensions (1,1) {mustBeInteger}
+    nvp.Dimensions (1,1) {mustBeInteger,mustBePositive}
     nvp.ApiKey           {llms.utils.mustBeNonzeroLengthTextScalar}
 end
 
@@ -42,6 +42,7 @@ if isfield(nvp, "Dimensions")
         error("llms:invalidOptionForModel", ...
             llms.utils.errorMessageCatalog.getMessage("llms:invalidOptionForModel", "Dimensions", nvp.ModelName));
     end
+    mustBeCorrectDimensions(nvp.Dimensions,nvp.ModelName);
     parameters.dimensions = nvp.Dimensions;
 end
 
@@ -53,4 +54,17 @@ if isfield(response.Body.Data, "data")
     emb = emb';
 else
     emb = [];
+end
+end
+
+function mustBeCorrectDimensions(dimensions,modelName)
+    model2dim = ....
+    dictionary(["text-embedding-3-large", "text-embedding-3-small"], ...
+    [3072,1536]);
+
+    if dimensions>model2dim(modelName)
+        error("llms:dimensionsMustBeSmallerThan", ...
+            llms.utils.errorMessageCatalog.getMessage("llms:dimensionsMustBeSmallerThan", ...
+            string(model2dim(modelName))));
+    end
 end

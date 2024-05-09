@@ -85,8 +85,8 @@ classdef openAIImages
             %                          Only "dall-e-3" supports this parameter.
 
             arguments
-                this                    (1,1)  openAIImages
-                prompt                        {mustBeTextScalar}
+                this                    (1,1) openAIImages
+                prompt                        {mustBeNonzeroLengthTextScalar}
                 nvp.NumImages           (1,1) {mustBePositive, mustBeInteger,...
                                                 mustBeLessThanOrEqual(nvp.NumImages,10)} = 1
                 nvp.Size                (1,1) string {mustBeMember(nvp.Size, ["256x256", "512x512", ...
@@ -176,7 +176,7 @@ classdef openAIImages
             arguments
                 this                    (1,1)  openAIImages
                 imagePath                     {mustBeValidFileType(imagePath)}
-                prompt                        {mustBeTextScalar}
+                prompt                        {mustBeNonzeroLengthTextScalar}
                 nvp.MaskImagePath             {mustBeValidFileType(nvp.MaskImagePath)}
                 nvp.NumImages           (1,1) {mustBePositive, mustBeInteger,...
                                                 mustBeLessThanOrEqual(nvp.NumImages,10)} = 1
@@ -345,7 +345,9 @@ end
 function mustBeValidFileType(filePath)
     mustBeFile(filePath);
     s = dir(filePath);
-    if ~endsWith(s.name, ".png")
+    imgDetails = imfinfo(filePath);
+    imgFormat = imgDetails.Format;
+    if ~(imgFormat=="png")
         error("llms:pngExpected", ...
             llms.utils.errorMessageCatalog.getMessage("llms:pngExpected"));
     end
