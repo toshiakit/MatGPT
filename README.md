@@ -19,12 +19,13 @@ MatGPT was updated to run on the framework from the '[Large Language Models (LLM
 * MatGPT detects a URL included in a prompt, and retrieves its web content into the chat.
 * MatGPT lets you import a .m, .mlx, .csv or .txt file into the chat. PDF files are also supported if Text Analytics Toolbox is available.
 * MatGPT supports GPT-4 Turbo with Vision. You can pass the URL to an image, or a local image file path ask questions about the image.
-* MatGPT lets you generate an image via DALL·E 3. 
+* MatGPT lets you generate an image via DALL·E 3 API. 
+* MatGPT supports voice chat via Whisper API. 
 
 Please note that:
 
 * imported content will be truncated if it exceeds the context window limit.
-* Streaming must be disabled to use image generation via DALL·E 3. 
+* Streaming must be disabled to use image generation via DALL·E 3.
 
 ## Requirements
 

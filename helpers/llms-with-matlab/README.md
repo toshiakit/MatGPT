@@ -1,4 +1,6 @@
-# Large Language Models (LLMs) with MATLAB® [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=matlab-deep-learning/llms-with-matlab)
+# Large Language Models (LLMs) with MATLAB®
+
+[![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=matlab-deep-learning/llms-with-matlab) [![View Large Language Models (LLMs) with MATLAB on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/163796-large-language-models-llms-with-matlab) 
 
 This repository contains example code to demonstrate how to connect MATLAB to the OpenAI™ Chat Completions API (which powers ChatGPT™) as well as OpenAI Images API (which powers DALL·E™). This allows you to leverage the natural language processing capabilities of large language models directly within your MATLAB environment.
 
@@ -142,7 +144,7 @@ txt = generate(chat,"What is Model-Based Design and how is it related to Digital
 ### Calling MATLAB functions with the API
 
 Optionally, `Tools=functions` can be used to provide function specifications to the API. The purpose of this is to enable models to generate function arguments which adhere to the provided specifications. 
-Note that the API is not able to directly call any function, so you should call the function and pass the values to the API directly. This process can be automated as shown in [ExampleFunctionCalling.mlx](/examples/ExampleFunctionCalling.mlx), but it's important to consider that ChatGPT can hallucinate function names, so avoid executing any arbitrary generated functions and only allow the execution of functions that you have defined. 
+Note that the API is not able to directly call any function, so you should call the function and pass the values to the API directly. This process can be automated as shown in [AnalyzeScientificPapersUsingFunctionCalls.mlx](/examples/AnalyzeScientificPapersUsingFunctionCalls.mlx), but it's important to consider that ChatGPT can hallucinate function names, so avoid executing any arbitrary generated functions and only allow the execution of functions that you have defined. 
 
 For example, if you want to use the API for mathematical operations such as `sind`, instead of letting the model generate the result and risk running into hallucinations, you can give the model direct access to the function as follows:
 
@@ -333,7 +335,7 @@ To learn how to use this in your workflows, see [Examples](/examples/).
 - [SummarizeLargeDocumentsUsingChatGPTandMATLAB.mlx](/examples/SummarizeLargeDocumentsUsingChatGPTandMATLAB.mlx): Learn to create concise summaries of long texts with ChatGPT. (Requires Text Analytics Toolbox™)
 - [CreateSimpleChatBot.mlx](/examples/CreateSimpleChatBot.mlx): Build a conversational chatbot capable of handling various dialogue scenarios using ChatGPT. (Requires Text Analytics Toolbox)
 - [AnalyzeScientificPapersUsingFunctionCalls.mlx](/examples/AnalyzeScientificPapersUsingFunctionCalls.mlx): Learn how to create agents capable of executing MATLAB functions. 
-- [ExampleParallelFunctionCalls.mlx](/examples/ExampleParallelFunctionCalls.mlx): Learn how to take advantage of parallel function calling. 
+- [AnalyzeTextDataUsingParallelFunctionCallwithChatGPT.mlx](/examples/AnalyzeTextDataUsingParallelFunctionCallwithChatGPT.mlx): Learn how to take advantage of parallel function calling. 
 - [RetrievalAugmentedGenerationUsingChatGPTandMATLAB.mlx](/examples/RetrievalAugmentedGenerationUsingChatGPTandMATLAB.mlx): Learn about retrieval augmented generation with a simple use case. (Requires Text Analytics Toolbox™)
 - [DescribeImagesUsingChatGPT.mlx](/examples/DescribeImagesUsingChatGPT.mlx): Learn how to use GPT-4 Turbo with Vision to understand the content of an image. 
 - [AnalyzeSentimentinTextUsingChatGPTinJSONMode.mlx](/examples/AnalyzeSentimentinTextUsingChatGPTinJSONMode.mlx): Learn how to use JSON mode in chat completions
