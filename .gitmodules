@@ -1,0 +1,3 @@
+[submodule "helpers/llms-with-matlab"]
+	path = helpers/llms-with-matlab
+	url = https://github.com/matlab-deep-learning/llms-with-matlab
