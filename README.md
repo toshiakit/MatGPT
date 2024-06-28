@@ -47,6 +47,7 @@ Use Git commands to clone the repo to your local directory, and then clone the s
 git clone https://github.com/toshiakit/MatGPT.git
 git submodule update --init
 ```
+If you download MatGPT as a Zip file, the zip file will not contain the submodule. You need to download 'LLMs with MATLAB' separately and unzip into the 'LLMs with MATLAB' folder in the helpers folder. 
 
 ## How to use: MatGPT app
 
