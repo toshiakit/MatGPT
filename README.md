@@ -8,13 +8,14 @@ MatGPT is a MATLAB app that allows you to easily access OpenAI's ChatGPT API. Wi
 
 The app simply serves as an interface to the ChatGPT API. You should be familiar with the limitations and risks associated with using this technology as well as with [OpenAI terms and policies](https://openai.com/policies). You are responsible for any fees OpenAI may charge for the use of their API. 
 
-MatGPT was updated to run on the framework from the '[Large Language Models (LLMs) with MATLAB](https://github.com/matlab-deep-learning/llms-with-matlab/)' repo maintained by MathWorks.
+MatGPT requires '[Large Language Models (LLMs) with MATLAB](https://github.com/matlab-deep-learning/llms-with-matlab/)' library maintained by MathWorks.
 
 [MATLAB AI Chat Playground](https://www.mathworks.com/matlabcentral/playground/) is a great alternative to MatGPT on MATLAB Central. 
 
 ## What's New
 
-* MatGPT runs on the 'LLMs with MATLAB' framework, which requires MATLAB R2023a or later. 
+* MatGPT loads 'LLMs with MATLAB' library as a submodule.
+* MatGPT stores your API in MATLAB Vault on R2024a or later. The stored API will persist from session to session.
 * MatGPT supports streaming API where response tokens are displayed as they come in.
 * MatGPT detects a URL included in a prompt, and retrieves its web content into the chat.
 * MatGPT lets you import a .m, .mlx, .csv or .txt file into the chat. PDF files are also supported if Text Analytics Toolbox is available.
@@ -29,21 +30,25 @@ Please note that:
 
 ## Requirements
 
+* **Submodule**: '[Large Language Models (LLMs) with MATLAB](https://github.com/matlab-deep-learning/llms-with-matlab/) 
 * **MathWorks Products (https://www.mathworks.com)**: Use MatGPT to run on [MATLAB Online](https://www.mathworks.com/products/matlab-online.html) that comes with the most commonly used toolboxes. To use it on desktop, you must have MATLAB R2023a or later installed on your computer. 
-* **OpenAI API Key**: Additionally, you will need your own API key from [https://platform.openai.com/account/api-keys](https://platform.openai.com/account/api-keys). If you don’t want to set up an API access with OpenAI, [MATLAB AI Chat Playground](https://www.mathworks.com/matlabcentral/playground/) is a better option. 
+* **OpenAI API Key**: Additionally, you will need your own API key from [https://platform.openai.com/api-keys](https://platform.openai.com/api-keys). If you don’t want to set up an API access with OpenAI, [MATLAB AI Chat Playground](https://www.mathworks.com/matlabcentral/playground/) is a better option. 
 * GPT-4 models are [available to all API users who have a history of successful payments](https://openai.com/blog/gpt-4-api-general-availability). If you have not made any payment to OpenAI, the GPT-4 models are not accessible. 
 
 ## Installation
 
 ### MATLAB Online
 
-To use MatGPT on MATLAB Online, simply click [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=toshiakit/MatGPT&file=MatGPT.mlapp)
+To use MatGPT on MATLAB Online, simply click [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=toshiakit/MatGPT&file=MatGPT.mlapp) MATLAB Online pulls the content of this repo, including "LLMS with MATLAB" submodule. 
 
 #### MATLAB Desktop
 
-1. Download the content of this repository into a MATLAB path. 
-2. Launch MATLAB 
-3. type 'MatGPT' in the command window
+Use Git commands to clone the repo to your local directory, and then clone the submodules. This will ensure you get the 'LLMs with MATLAB' library. 
+```
+git clone https://github.com/toshiakit/MatGPT.git
+git submodule update --init
+```
+If you download MatGPT as a Zip file, the zip file will not contain the submodule. You need to download 'LLMs with MATLAB' separately and unzip into the 'LLMs with MATLAB' folder in the helpers folder. 
 
 ## How to use: MatGPT app
 
