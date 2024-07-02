@@ -32,7 +32,7 @@ Please note that:
 
 * **Submodule**: '[Large Language Models (LLMs) with MATLAB](https://github.com/matlab-deep-learning/llms-with-matlab/) 
 * **MathWorks Products (https://www.mathworks.com)**: Use MatGPT to run on [MATLAB Online](https://www.mathworks.com/products/matlab-online.html) that comes with the most commonly used toolboxes. To use it on desktop, you must have MATLAB R2023a or later installed on your computer. 
-* **OpenAI API Key**: Additionally, you will need your own API key from [https://platform.openai.com/account/api-keys](https://platform.openai.com/account/api-keys). If you don’t want to set up an API access with OpenAI, [MATLAB AI Chat Playground](https://www.mathworks.com/matlabcentral/playground/) is a better option. 
+* **OpenAI API Key**: Additionally, you will need your own API key from [https://platform.openai.com/api-keys](https://platform.openai.com/api-keys). If you don’t want to set up an API access with OpenAI, [MATLAB AI Chat Playground](https://www.mathworks.com/matlabcentral/playground/) is a better option. 
 * GPT-4 models are [available to all API users who have a history of successful payments](https://openai.com/blog/gpt-4-api-general-availability). If you have not made any payment to OpenAI, the GPT-4 models are not accessible. 
 
 ## Installation
