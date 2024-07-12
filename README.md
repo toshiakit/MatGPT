@@ -15,7 +15,7 @@ MatGPT requires '[Large Language Models (LLMs) with MATLAB](https://github.com/m
 ## What's New
 
 * MatGPT loads 'LLMs with MATLAB' library as a submodule.
-* MatGPT stores your API in MATLAB Vault on R2024a or later. The stored API will persist from session to session.
+* MatGPT stores your API in MATLAB Vault on R2024a or later. The stored API will persist from session to session. (Not supported on MATLAB Online). 
 * MatGPT supports streaming API where response tokens are displayed as they come in.
 * MatGPT detects a URL included in a prompt, and retrieves its web content into the chat.
 * MatGPT lets you import a .m, .mlx, .csv or .txt file into the chat. PDF files are also supported if Text Analytics Toolbox is available.
