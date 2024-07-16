@@ -41,6 +41,8 @@ Please note that:
 
 To use MatGPT on MATLAB Online, simply click [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=toshiakit/MatGPT&file=MatGPT.mlapp) MATLAB Online pulls the content of this repo, including "LLMS with MATLAB" submodule. 
 
+Please note that "Open in MATLAB Online" button on the File Exchange doesn't pull the submodule. You will need to pull LLMs with MATLAB separately and add it to the 'LLMs with MATLAB' folder in the helpers folder. 
+
 #### MATLAB Desktop
 
 Use Git commands to clone the repo to your local directory, and then clone the submodules. This will ensure you get the 'LLMs with MATLAB' library. 
