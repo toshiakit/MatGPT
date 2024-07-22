@@ -1,10 +1,10 @@
 name,content,prompt,model,max_tokens,temperature,test_code,suggested_questions,streaming
-AI Assistant,You are a helpful assistant. Answer as concisely as possible. ,Where is the capital of France?,gpt-3.5-turbo,1000,1,0,1,1
-Read a web page,You are a helpful assistant that can read a small web page and analyze its content. The content of the page will be extracted by an external function and stored in the chat history. ,What is this page about? https://www.mathworks.com/help/matlab/text-files.html,gpt-3.5-turbo,1000,0,0,1,1
-Read a local file,You are a helpful assistant that can read a small file and analyze its content. The content of the file will be extracted by an external function and stored in the chat history. ,Select a file using the paper clip icon on the left.,gpt-3.5-turbo,1000,0,0,1,1
-Understand an image,You are a helpful assistant that can see an image and analyze its content.,What is in this image? https://www.mathworks.com/help/examples/matlab/win64/DisplayGrayscaleRGBIndexedOrBinaryImageExample_04.png,gpt-4-turbo,1000,1,0,1,1
+AI Assistant,You are a helpful assistant. Answer as concisely as possible. ,Where is the capital of France?,gpt-4o-mini,1000,1,0,1,1
+Read a web page,You are a helpful assistant that can read a small web page and analyze its content. The content of the page will be extracted by an external function and stored in the chat history. ,What is this page about? https://www.mathworks.com/help/matlab/text-files.html,gpt-4o-mini,1000,0,0,1,1
+Read a local file,You are a helpful assistant that can read a small file and analyze its content. The content of the file will be extracted by an external function and stored in the chat history. ,Select a file using the paper clip icon on the left.,gpt-4o-mini,1000,0,0,1,1
+Understand an image,You are a helpful assistant that can see an image and analyze its content.,What is in this image? https://www.mathworks.com/help/examples/matlab/win64/DisplayGrayscaleRGBIndexedOrBinaryImageExample_04.png,gpt-4o-mini,1000,1,0,1,1
 Generate an image,You are an AI assistant that can generate an image from a text prompt.,"An adventurous man clad in athletic gear is kiteboarding, harnessing the wind with his kite to skim across the waters of the famed Charles River in Boston. Nearby, a picturesque sailboat dances with the breeze. The city's skyline paints a stunning backdrop to the scene, while the surface of the river mirrors the golden hues of the setting sun. ",dall-e-3,4096,1,0,0,0
-English to MATLAB Code,You are a helpful assistant that generates MATLAB code. ,"Define two random vectors x and y, fit a linear model to the data, and plot both the data and fitted line.",gpt-3.5-turbo,1000,0,1,1,1
+English to MATLAB Code,You are a helpful assistant that generates MATLAB code. ,"Define two random vectors x and y, fit a linear model to the data, and plot both the data and fitted line.",gpt-4o-mini,1000,0,1,1,1
 Summarize Code,You are a friendly and helpful teaching assistant for MATLAB programmers. Analyze MATLAB code and provide concise summary of what the code does. ,"Summarize what the following code does. Code by Cecelya Blooming Light in MATLAB Mini Hack 2022
 
 ```matlab
@@ -24,7 +24,7 @@ axis( 'equal','off')
 view([0 33]) 
 colormap(flip(hot)) 
 shading('interp')
-```",gpt-3.5-turbo,1000,0,0,1,1
+```",gpt-4o-mini,1000,0,0,1,1
 Explain Code Step by Step,You are a friendly and helpful teaching assistant for MATLAB programmers. Analyze MATLAB code and explain the code step by step.,"Explain what the following code does. Code by Cecelya Blooming Light in MATLAB Mini Hack 2022 
 
 ```matlab
@@ -44,7 +44,7 @@ axis( 'equal','off')
 view([0 33]) 
 colormap(flip(hot)) 
 shading('interp')
-```",gpt-3.5-turbo,1000,0,0,1,1
+```",gpt-4o-mini,1000,0,0,1,1
 Script to function,You are a friendly and helpful teaching assistant for MATLAB programmers. Convert MATLAB scripts to a local function and call the function using sample inputs.  ,"Convert the following script to a function, using m and T as input variables and set default values to those variables. Code by Cecelya Blooming Light in MATLAB Mini Hack 2022
 
 ```matlab
@@ -64,7 +64,7 @@ axis( 'equal','off')
 view([0 33]) 
 colormap(flip(hot)) 
 shading('interp')
-```",gpt-3.5-turbo,1000,0,1,1,1
+```",gpt-4o-mini,1000,0,1,1,1
 Write doc to function,"You are a friendly and helpful teaching assistant for MATLAB programmers. Analyze a MATLAB function and add an elaborate, high quality docstring to the function.","Write useful docstring to this function derived from the code, using comment format %PLOTBLOOMINGLIGHTS does blah blah blah.  Code by Cecelya Blooming Light in MATLAB Mini Hack 2022
 
 ```matlab
@@ -88,7 +88,7 @@ view([0 33])
 colormap(flip(hot)) 
 shading('interp')
 end
-```",gpt-3.5-turbo,1000,0,0,1,1
+```",gpt-4o-mini,1000,0,0,1,1
 Fix Bug,You are a friendly and helpful teaching assistant for MATLAB programmers. Analyze buggy MATLAB code and provide error free code using latest features from R2021a or later. ,"Fix bug in the following MATLAB code
 
 ```matlab
@@ -100,14 +100,14 @@ y = ""a"" + b
 end
 ```
 
-% Fixed MATLAB code",gpt-3.5-turbo,1000,0,0,1,1
+% Fixed MATLAB code",gpt-4o-mini,1000,0,0,1,1
 Write Unit Tests,You are a friendly and helpful teaching assistant for MATLAB programmers. Analyze MATLAB functions and write appropriate unit tests.,"Write unit tests for this function, 
 
 ```matlab
 function y = add(a, b)
 y = a + b
 end
-```",gpt-3.5-turbo,1000,0,0,1,1
+```",gpt-4o-mini,1000,0,0,1,1
 Vectorize Code,You are a friendly and helpful teaching assistant for MATLAB programmers. Analyze MATLAB code and rewrite it to improve efficiency using vectorization rather than for loops.,"Vectorize the following code without using for loop. 
 
 ```matlab
@@ -116,12 +116,12 @@ for t = 0:.01:10
     i = i + 1;
     y(i) = sin(t);
 end
-```",gpt-3.5-turbo,1000,0,1,1,1
+```",gpt-4o-mini,1000,0,1,1,1
 Act as MATLAB Command Window,"You are a MATLAB interpreter. I will give you MATLAB code, you'll reply with what the Command Window should show. Do not provide any explanations. Do not respond with anything except the output of the code. ","```matlab
 x = (1:10)*2
 ```
 
-",gpt-3.5-turbo,1000,0,0,1,1
+",gpt-4o-mini,1000,0,0,1,1
 Sentiment Analysis,You are a helpful assistant that helps data scientists by analyzing sentiment expressed in a given text.,"Decide whether sentiment is positive, neutral, or negative for the following text
 
 1. ""I can't stand homework""
@@ -130,7 +130,7 @@ Sentiment Analysis,You are a helpful assistant that helps data scientists by ana
 4. ""My cat is adorable ❤️❤️""
 5. ""I hate chocolate""
 
-Text sentiment ratings:",gpt-3.5-turbo,1000,0,0,1,1
+Text sentiment ratings:",gpt-4o-mini,1000,0,0,1,1
 Contact Extraction,You are a helpful assistant that helps data scientists by analyzing unstructured data and extract personally identifiable information.,"Extract the name and mailing address from this text: 
 
 Dear Kelly,
@@ -142,7 +142,7 @@ Thank you for the book. Here's my address
 
 Best,
 
-Maya",gpt-3.5-turbo,1000,0,0,1,1
+Maya",gpt-4o-mini,1000,0,0,1,1
 Extract table from PDF,You are a helpful assistant that helps data scientists by analyzing unstructured data and recreate a table from the text extracted from a PDF file.,"format the following PDF data into a table. Start with a title, then the table and end with a footer citing the source.
 
 A(Percentage)verage annual export growth rates of creative goods, 2006−2020
@@ -210,20 +210,20 @@ A(Percentage)verage annual export growth rates of creative goods, 2006−2020
      -7.2
      
      
-     ",gpt-3.5-turbo,1000,0,0,1,1
-Top 10 SciFi movies,You are a helpful assistant that helps data scientists extract useful public data for analysis.,"Create a  table of top 10 science fiction movies,  their year of release, and box office gross. Name columns 'Title', 'Year', and 'Gross'.",gpt-3.5-turbo,1000,0,0,1,1
+     ",gpt-4o-mini,1000,0,0,1,1
+Top 10 SciFi movies,You are a helpful assistant that helps data scientists extract useful public data for analysis.,"Create a  table of top 10 science fiction movies,  their year of release, and box office gross. Name columns 'Title', 'Year', and 'Gross'.",gpt-4o-mini,1000,0,0,1,1
 San Francisco Weather,You are a helpful assistant that helps data scientists extract useful public data for analysis.,"Create a table of weather temperatures for San Francisco.
 Name columns 'Month', 'High', and 'Low'. 
-Use abbreviated month names. Use numbers only for temperature using Fahrenheit.",gpt-3.5-turbo,1000,0,0,1,1
+Use abbreviated month names. Use numbers only for temperature using Fahrenheit.",gpt-4o-mini,1000,0,0,1,1
 Boston Housing Prices,You are a helpful assistant that helps data scientists extract useful public data for analysis.,"Housing prices are correlated with size of the house. 
 Create a table of housing prices in Boston based on square footage as size 
 with columns named 'Sqft' and 'Price' with 10 rows. Randomize the values in 'Sqft', 
-while maintaining the correlation to 'Price' with some variation.",gpt-3.5-turbo,1000,0,0,1,1
+while maintaining the correlation to 'Price' with some variation.",gpt-4o-mini,1000,0,0,1,1
 Boston Landmarks,You are a helpful assistant that helps data scientists extract useful public data for analysis.,"Create a markdown table of famous landmarks in Boston 
      with latitude and longitude in decimal degrees, i.e. 42.361145, -71.057083
      Generate MATLAB Code that stores the data in variables landmarks, lat and lon. 
      Use geoscatter function to plot the data points. Annotate the data points with the names of the landmarks using text function.
-     Avoid using for loop.",gpt-3.5-turbo,1000,0,0,1,1
+     Avoid using for loop.",gpt-4o-mini,1000,0,0,1,1
 Remove duplicate names,You are a helpful assistant that helps data scientists extract useful public data for analysis.,"Here is a list of names.
 
 John Smith
@@ -240,7 +240,7 @@ Brown Jennifer
 Create a table with two columns from this list 
 that split the first name and last name. 
 If first name appears as last name, correct the order.  
-remove any duplicates. Show the table in markdown format.",gpt-3.5-turbo,1000,0,0,1,1
+remove any duplicates. Show the table in markdown format.",gpt-4o-mini,1000,0,0,1,1
 Email Domains to Company Names,You are a helpful assistant that helps data scientists extract useful public data for analysis.,"Identify legal company names based on the following domains
 
 1. @apple.com
@@ -256,7 +256,7 @@ Email Domains to Company Names,You are a helpful assistant that helps data scien
 11. @mcdonalds.com
 12. @chevron.com1
 13. @unitedparcelservice.com
-14. @dell.com",gpt-3.5-turbo,1000,0,0,1,1
+14. @dell.com",gpt-4o-mini,1000,0,0,1,1
 Normalize University Names,You are a helpful assistant that helps data scientists extract useful public data for analysis.,"Normalize the list of university names below. If a university has multiple names, apply the most common full name, not an abbreviation.
 
 CMU
@@ -280,4 +280,4 @@ Georgiatech
 MIT
 Massachusetts Institute of Technology
 
-",gpt-3.5-turbo,1000,0,0,1,1
+",gpt-4o-mini,1000,0,0,1,1

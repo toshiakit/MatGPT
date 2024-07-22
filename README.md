@@ -14,6 +14,7 @@ MatGPT requires '[Large Language Models (LLMs) with MATLAB](https://github.com/m
 
 ## What's New
 
+* MatGPT supports GPT-4o mini as the default model, which delivers higher performance at a lower cost than GPT-3.5 Turbo.
 * MatGPT loads 'LLMs with MATLAB' library as a submodule.
 * MatGPT stores your API in MATLAB Vault on R2024a or later. The stored API will persist from session to session. (Not supported on MATLAB Online). 
 * MatGPT supports streaming API where response tokens are displayed as they come in.
@@ -25,6 +26,7 @@ MatGPT requires '[Large Language Models (LLMs) with MATLAB](https://github.com/m
 
 Please note that:
 
+* If you have a previous version of MatGPT, you may need to reinstall it in order to get the updated submodule required for GPT-4o mini support. 
 * imported content will be truncated if it exceeds the context window limit.
 * Streaming must be disabled to use image generation via DALL·E 3.
 
