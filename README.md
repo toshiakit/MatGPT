@@ -82,6 +82,20 @@ If you download MatGPT as a Zip file, the zip file will not contain the submodul
 
 chatGPT class was replaced by the framework provided via the '[Large Language Models (LLMs) with MATLAB](https://github.com/matlab-deep-learning/llms-with-matlab/)' repo. The new framework supports function calling and other latest features. Please refer to the documentation in the repo to learn how to use it.
 
+## Related GenAI Projects from MathWorks
+
+Check out these other GenAI-related projects from the [MATLAB GitHub organization](https://github.com/matlab):
+
+| Repository | Description |
+|------------|-------------|
+| [MATLAB MCP Core Server](https://github.com/matlab/matlab-mcp-core-server) | Run MATLAB using AI applications with the official MATLAB MCP Server |
+| [MCP Framework for MATLAB Production Server](https://github.com/matlab/mcp-framework-matlab-production-server) | Publish MATLAB functions as MCP tools for AI agents using MATLAB Production Server |
+| [MATLAB MCP HTTP Client](https://github.com/matlab-deep-learning/mcpHTTPClient) | MCP client in pure MATLAB to connect to MCP servers and call tools in LLM workflows |
+| [AI Prompts](https://github.com/matlab/prompts) | Curated collection of AI prompts for MATLAB development with AI coding assistants |
+| [Coding Rules](https://github.com/matlab/rules) | MATLAB coding rules and guidelines optimized for AI coding assistants |
+| [Agent Skills](https://github.com/matlab/skills) | Agent Skills that extend coding agent capabilities for MATLAB development |
+| [Slash Commands](https://github.com/matlab/slash-commands) | Slash commands to streamline MATLAB development workflows in Claude Code |
+
 ## Acknowledgements
 This code is adapted from [this MATLAB Answers comment](https://www.mathworks.com/matlabcentral/answers/1894530-connecting-to-chatgpt-using-api#answer_1154780) by [Hans Scharler](https://www.mathworks.com/matlabcentral/profile/authors/5863695) and uses [Brian Buechel](https://github.com/brianbuechel)'s [CodeChecker](helpers/CodeChecker.m) and other great contributions. The video shown above was created by [Angel Gonzalez Llacer](https://www.mathworks.com/matlabcentral/profile/authors/12391728). 
    
